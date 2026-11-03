@@ -1,1027 +1,505 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INDOSAKU - Konter Pulsa, Paket Data & Aksesoris HP</title>
-    <!-- Tailwind CSS -->
+    <title>INDOSAKU - Konter Pulsa, Aksesoris HP & PPOB</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                            900: '#064e3b',
-                            accent: '#0284c7'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        brand: { 50: '#eff6ff', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8' }
                     }
                 }
             }
         }
     </script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .glass-effect {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #1e293b;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 9999px;
-        }
-    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- TOP ANNOUNCEMENT BAR -->
-    <div class="bg-gradient-to-r from-brand-600 to-brand-accent text-white text-xs font-semibold py-2 px-4 text-center">
-        <span>⚡ Flash Sale Aksesoris HP Diskon s/d 50%! Gunakan Kode: <span class="underline underline-offset-2">INDOSAKUHEMAT</span></span>
-    </div>
-
-    <!-- HEADER / NAVIGATION -->
-    <header class="sticky top-0 z-40 glass-effect border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-            
-            <!-- Logo -->
-            <a href="#" class="flex items-center gap-3 group shrink-0">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-cyan-400 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform">
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 text-white p-2 rounded-xl font-black text-xl flex items-center justify-center w-10 h-10 shadow-md">
                     IS
                 </div>
                 <div>
-                    <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-brand-500 bg-clip-text text-transparent">INDOSAKU</span>
-                    <span class="block text-[10px] text-brand-500 font-medium tracking-widest uppercase -mt-1">Digital Store & Counter</span>
+                    <h1 class="text-xl font-bold tracking-tight text-gray-900 leading-none">INDOSAKU</h1>
+                    <span class="text-xs text-blue-600 font-medium">Pulsa, Kuota & Aksesoris HP</span>
                 </div>
-            </a>
-
-            <!-- Search Bar (Desktop) -->
-            <div class="hidden md:flex flex-1 max-w-md relative">
-                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari aksesoris, charger, casing, atau voucher game..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-full py-2.5 pl-11 pr-4 text-sm focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition placeholder-slate-500 text-slate-200">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
             </div>
-
-            <!-- Header Actions -->
-            <div class="flex items-center gap-4">
-                <button onclick="toggleCartDrawer()" class="relative p-2.5 rounded-full bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-200 hover:text-brand-500 transition">
-                    <i class="fa-solid fa-bag-shopping text-lg"></i>
-                    <span id="cartCountBadge" class="absolute -top-1 -right-1 bg-brand-500 text-slate-950 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center scale-0 transition-transform duration-300">0</span>
+            
+            <div class="flex items-center space-x-4">
+                <button onclick="toggleCart()" class="relative bg-gray-100 hover:bg-gray-200 p-2.5 rounded-full transition flex items-center justify-center">
+                    <i class="fa-solid fa-cart-shopping text-gray-700"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold hidden">0</span>
                 </button>
-                <a href="#pulsaSection" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-slate-950 font-bold px-5 py-2.5 rounded-full text-sm transition shadow-lg shadow-brand-500/20 active:scale-95">
-                    <i class="fa-solid fa-bolt"></i> ISI PULSA
-                </a>
-            </div>
-        </div>
-
-        <!-- Search Bar Mobile -->
-        <div class="px-4 pb-3 md:hidden">
-            <div class="relative">
-                <input type="text" id="searchInputMobile" oninput="handleSearchMobile()" placeholder="Cari barang atau layanan..." class="w-full bg-slate-900 border border-slate-700 rounded-full py-2 pl-10 pr-4 text-xs focus:outline-none focus:border-brand-500">
-                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
             </div>
         </div>
     </header>
 
-    <!-- MAIN HERO & QUICK PULSA TOP-UP SECTION -->
-    <main class="flex-grow">
-        <section id="pulsaSection" class="relative py-12 lg:py-16 overflow-hidden border-b border-slate-800/80 bg-slate-950">
-            <!-- Background Glow FX -->
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8 w-full">
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                    
-                    <!-- Left Hero Text -->
-                    <div class="lg:col-span-5 space-y-6 text-center lg:text-left">
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-500 text-xs font-semibold">
-                            <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
-                            Layanan Otomatis 24 Jam Nonstop
-                        </div>
-                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
-                            Isi Pulsa & Data <span class="bg-gradient-to-r from-brand-500 to-cyan-400 bg-clip-text text-transparent">Hitungan Detik!</span>
-                        </h1>
-                        <p class="text-slate-400 text-sm sm:text-base">
-                            Beli Pulsa, Paket Data All Operator, Voucher Game, hingga Aksesoris Smartphone berkualitas original dengan garansi toko resmi INDOSAKU.
-                        </p>
-                        
-                        <!-- Trust Badges -->
-                        <div class="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-400">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-shield-halved text-brand-500 text-base"></i> Transaksi Aman
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-bolt-lightning text-yellow-400 text-base"></i> Proses Instan
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-headset text-cyan-400 text-base"></i> CS 24/7
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Quick Pulsa Form Card -->
-                    <div class="lg:col-span-7">
-                        <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
-                            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
-                                <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                                    <i class="fa-solid fa-mobile-screen-button text-brand-500"></i> Pengisian Otomatis
-                                </h2>
-                                <!-- Operator Logo Preview Badge -->
-                                <div id="operatorBadge" class="hidden items-center gap-2 bg-slate-800 px-3 py-1 rounded-full border border-slate-700 text-xs font-semibold text-slate-300">
-                                    <span id="opIcon">📱</span>
-                                    <span id="opName">Operator</span>
-                                </div>
-                            </div>
-
-                            <!-- Form Field Number -->
-                            <div class="mb-6">
-                                <label class="block text-xs font-medium text-slate-400 mb-2">Nomor HP Pelanggan</label>
-                                <div class="relative">
-                                    <input type="tel" id="phoneNumber" oninput="detectOperator()" placeholder="Contoh: 081234567890" class="w-full bg-slate-950 border border-slate-700 rounded-2xl py-3.5 px-4 pr-12 text-lg font-semibold tracking-wider text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition">
-                                    <div class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500">
-                                        <i class="fa-solid fa-address-book text-xl"></i>
-                                    </div>
-                                </div>
-                                <p id="phoneError" class="text-red-400 text-xs mt-1.5 hidden">Masukkan nomor HP Indonesia yang valid (min. 10 digit)</p>
-                            </div>
-
-                            <!-- Tabs Switcher: Pulsa / Data -->
-                            <div class="flex bg-slate-950 p-1 rounded-xl border border-slate-800 mb-6">
-                                <button onclick="switchPulsaTab('pulsa')" id="tabPulsaBtn" class="flex-1 py-2 rounded-lg text-xs font-bold transition bg-brand-500 text-slate-950">
-                                    Pulsa Reguler
-                                </button>
-                                <button onclick="switchPulsaTab('data')" id="tabDataBtn" class="flex-1 py-2 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white">
-                                    Paket Data Internet
-                                </button>
-                            </div>
-
-                            <!-- Package Items Grid -->
-                            <div id="nominalGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-72 overflow-y-auto custom-scrollbar pr-1">
-                                <!-- Pulsa/Data Items inject dynamically via JS -->
-                            </div>
-
-                            <!-- Quick Action Button -->
-                            <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between gap-4">
-                                <div>
-                                    <span class="block text-[11px] text-slate-400">Total Nominal Selected</span>
-                                    <span id="selectedProductPrice" class="text-xl font-black text-brand-500">Rp 0</span>
-                                </div>
-                                <button onclick="processPulsaOrder()" id="btnBuyPulsa" disabled class="bg-slate-800 text-slate-500 font-bold px-6 py-3 rounded-xl text-sm transition flex items-center gap-2 cursor-not-allowed">
-                                    <span>Beli Sekarang</span> <i class="fa-solid fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+        <!-- Banner / Hero Section -->
+        <section class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
+            <div class="relative z-10 max-w-xl">
+                <span class="bg-blue-500/50 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Layanan 24 Jam</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold mt-3 tracking-tight">Solusi Digital & Aksesoris HP Terlengkap</h2>
+                <p class="mt-2 text-blue-100 text-sm sm:text-base">Isi pulsa, paket data, token listrik, dan beli aksesoris original termurah langsung dari genggaman Anda.</p>
+            </div>
+            <div class="absolute right-0 bottom-0 opacity-10 transform translate-x-10 translate-y-10">
+                <i class="fa-solid fa-mobile-screen-button text-9xl"></i>
             </div>
         </section>
 
-        <!-- CATEGORIES & MAIN STORE PRODUCTS -->
-        <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Category Navigation Tabs -->
-            <div class="flex items-center justify-between mb-8 pb-4 border-b border-slate-800">
-                <div>
-                    <h2 class="text-2xl font-bold text-white">Katalog Produk & Services</h2>
-                    <p class="text-xs text-slate-400 mt-1">Pilih kategori produk aksesoris HP atau voucher digital</p>
-                </div>
-            </div>
+        <!-- Tab Navigasi Menu -->
+        <div class="flex space-x-2 border-b border-gray-200 pb-3 overflow-x-auto">
+            <button onclick="switchTab('pulsa')" id="btn-pulsa" class="px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-blue-600 text-white shadow-sm flex items-center space-x-2 whitespace-nowrap">
+                <i class="fa-solid fa-bolt"></i> <span>Pulsa & PPOB</span>
+            </button>
+            <button onclick="switchTab('aksesoris')" id="btn-aksesoris" class="px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center space-x-2 whitespace-nowrap">
+                <i class="fa-solid fa-headphones"></i> <span>Aksesoris HP</span>
+            </button>
+        </div>
 
-            <!-- Filter Buttons -->
-            <div class="flex items-center gap-2 overflow-x-auto pb-4 custom-scrollbar mb-8">
-                <button onclick="filterCategory('all')" class="category-btn active px-5 py-2.5 rounded-full border border-brand-500 bg-brand-500/10 text-brand-500 text-xs font-bold whitespace-nowrap transition">
-                    <i class="fa-solid fa-border-all mr-1.5"></i> Semua Produk
-                </button>
-                <button onclick="filterCategory('aksesoris')" class="category-btn px-5 py-2.5 rounded-full border border-slate-800 bg-slate-900 text-slate-400 hover:border-slate-700 hover:text-white text-xs font-medium whitespace-nowrap transition">
-                    <i class="fa-solid fa-headphones mr-1.5"></i> Aksesoris HP
-                </button>
-                <button onclick="filterCategory('charger')" class="category-btn px-5 py-2.5 rounded-full border border-slate-800 bg-slate-900 text-slate-400 hover:border-slate-700 hover:text-white text-xs font-medium whitespace-nowrap transition">
-                    <i class="fa-solid fa-plug-charging mr-1.5"></i> Charger & Kabel
-                </button>
-                <button onclick="filterCategory('voucher')" class="category-btn px-5 py-2.5 rounded-full border border-slate-800 bg-slate-900 text-slate-400 hover:border-slate-700 hover:text-white text-xs font-medium whitespace-nowrap transition">
-                    <i class="fa-solid fa-gamepad mr-1.5"></i> Voucher Game & Streaming
-                </button>
-                <button onclick="filterCategory('ppob')" class="category-btn px-5 py-2.5 rounded-full border border-slate-800 bg-slate-900 text-slate-400 hover:border-slate-700 hover:text-white text-xs font-medium whitespace-nowrap transition">
-                    <i class="fa-solid fa-receipt mr-1.5"></i> Tagihan PPOB (PLN/PDAM)
-                </button>
-            </div>
-
-            <!-- Product Grid -->
-            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Products injected via JS -->
-            </div>
-            
-            <!-- Empty State -->
-            <div id="emptyState" class="hidden text-center py-16">
-                <div class="w-16 h-16 rounded-full bg-slate-900 flex items-center justify-center mx-auto text-slate-600 text-2xl mb-4">
-                    <i class="fa-solid fa-box-open"></i>
-                </div>
-                <h3 class="text-lg font-bold text-slate-300">Produk Tidak Ditemukan</h3>
-                <p class="text-xs text-slate-500 mt-1">Coba gunakan kata kunci lain atau ganti kategori filter.</p>
-            </div>
-        </section>
-
-        <!-- BANNER PROMO / STORE INFO -->
-        <section class="py-12 bg-slate-900/40 border-y border-slate-800/60">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-6 rounded-2xl border border-slate-800 flex items-start gap-4">
-                        <div class="p-3 bg-brand-500/10 border border-brand-500/20 text-brand-500 rounded-xl text-xl shrink-0">
-                            <i class="fa-solid fa-truck-fast"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white text-sm">Pengiriman Instan & COD</h4>
-                            <p class="text-xs text-slate-400 mt-1">Bisa dikirim via GoSend/GrabExpress untuk area Cibinong, Bogor & sekitarnya.</p>
+        <!-- TAB 1: PULSA & PPOB -->
+        <section id="tab-pulsa" class="space-y-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 max-w-2xl mx-auto">
+                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center space-x-2">
+                    <i class="fa-solid fa-sim-card text-blue-600"></i>
+                    <span>Isi Pulsa / Paket Data Instan</span>
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nomor Handphone</label>
+                        <div class="relative">
+                            <input type="tel" id="phone-input" oninput="detectOperator(this.value)" placeholder="Contoh: 08131611563" maxlength="14" class="w-full pl-4 pr-24 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none font-semibold text-gray-900">
+                            <div id="operator-badge" class="absolute right-3 top-2.5 text-xs font-bold px-2.5 py-1.5 rounded-lg bg-gray-200 text-gray-600 uppercase">
+                                Operator
+                            </div>
                         </div>
                     </div>
-                    <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-6 rounded-2xl border border-slate-800 flex items-start gap-4">
-                        <div class="p-3 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 rounded-xl text-xl shrink-0">
-                            <i class="fa-solid fa-qrcode"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white text-sm">Pembayaran Lengkap QRIS</h4>
-                            <p class="text-xs text-slate-400 mt-1">Dukung BCA, Mandiri, BRI, GoPay, OVO, Dana, ShopeePay & LinkAja.</p>
-                        </div>
-                    </div>
-                    <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-6 rounded-2xl border border-slate-800 flex items-start gap-4">
-                        <div class="p-3 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-xl text-xl shrink-0">
-                            <i class="fa-solid fa-shield-check"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white text-sm">Garansi Resmi Toko</h4>
-                            <p class="text-xs text-slate-400 mt-1">Garansi tukar baru 7 hari untuk aksesoris rusak pabrik.</p>
+
+                    <!-- Pilihan Nominal -->
+                    <div id="nominal-section" class="hidden">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Pilih Nominal / Paket</label>
+                        <div id="nominal-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <!-- Dinamis via JS -->
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- TAB 2: AKSESORIS HP -->
+        <section id="tab-aksesoris" class="hidden space-y-6">
+            <!-- Filter Kategori & Pencarian -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-between items-center">
+                <div class="flex items-center space-x-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
+                    <button onclick="filterCategory('all')" id="cat-all" class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white whitespace-nowrap">Semua</button>
+                    <button onclick="filterCategory('Case')" id="cat-case" class="px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-600 border border-gray-200 hover:bg-gray-100 whitespace-nowrap">Case HP</button>
+                    <button onclick="filterCategory('Charger')" id="cat-charger" class="px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-600 border border-gray-200 hover:bg-gray-100 whitespace-nowrap">Charger & Kabel</button>
+                    <button onclick="filterCategory('Audio')" id="cat-audio" class="px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-600 border border-gray-200 hover:bg-gray-100 whitespace-nowrap">Audio</button>
+                    <button onclick="filterCategory('Protektor')" id="cat-protektor" class="px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-600 border border-gray-200 hover:bg-gray-100 whitespace-nowrap">Tempered Glass</button>
+                </div>
+                <div class="w-full sm:w-72">
+                    <input type="text" id="search-input" oninput="searchProducts(this.value)" placeholder="Cari aksesoris..." class="w-full px-4 py-2 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+
+            <!-- List Produk Aksesoris -->
+            <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                <!-- Dinamis via JS -->
+            </div>
+        </section>
+
     </main>
 
-    <!-- SHOPPING CART DRAWER (SIDE PANEL) -->
-    <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
-        <!-- Backdrop -->
-        <div onclick="toggleCartDrawer()" class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"></div>
-
-        <!-- Content Panel -->
-        <div id="cartPanel" class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-slate-900 border-l border-slate-800 shadow-2xl flex flex-col pointer-events-auto transform translate-x-full transition-transform duration-300">
-            
-            <!-- Cart Header -->
-            <div class="p-5 border-b border-slate-800 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-bag-shopping text-brand-500 text-xl"></i>
-                    <h3 class="font-bold text-white text-lg">Keranjang Belanja</h3>
-                </div>
-                <button onclick="toggleCartDrawer()" class="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
+    <!-- Footer Informasi Kontak & Legalitas -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="space-y-3">
+                <h4 class="font-bold text-gray-900 text-base">INDOSAKU OFFICIAL</h4>
+                <p class="text-xs text-gray-600 leading-relaxed">Pusat transaksi pulsa elektrik, paket data, PPOB, serta grosir & eceran aksesoris handphone terpercaya.</p>
             </div>
-
-            <!-- Cart Items List -->
-            <div id="cartItemsContainer" class="flex-grow overflow-y-auto p-5 space-y-4 custom-scrollbar">
-                <!-- Injected dynamically -->
+            <div class="space-y-2">
+                <h4 class="font-bold text-gray-900 text-base">Kontak & Lokasi</h4>
+                <p class="text-xs text-gray-600 flex items-center space-x-2"><i class="fa-solid fa-location-dot text-blue-600 w-4"></i> <span>Alamat: Cibinong, Bogor, Jawa Barat</span></p>
+                <p class="text-xs text-gray-600 flex items-center space-x-2"><i class="fa-solid fa-phone text-blue-600 w-4"></i> <span>Telepon / WhatsApp: 08131611563</span></p>
+                <p class="text-xs text-gray-600 flex items-center space-x-2"><i class="fa-solid fa-envelope text-blue-600 w-4"></i> <span>Email: aangpratama187@gmail.com</span></p>
             </div>
-
-            <!-- Cart Footer -->
-            <div class="p-5 border-t border-slate-800 bg-slate-950 space-y-4">
-                <div class="space-y-2 text-xs">
-                    <div class="flex justify-between text-slate-400">
-                        <span>Subtotal</span>
-                        <span id="cartSubtotal">Rp 0</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Biaya Layanan Admin</span>
-                        <span class="text-brand-500 font-semibold">GRATIS</span>
-                    </div>
-                    <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-slate-800">
-                        <span>Total Pembayaran</span>
-                        <span id="cartTotal" class="text-brand-500">Rp 0</span>
-                    </div>
+            <div class="space-y-2">
+                <h4 class="font-bold text-gray-900 text-base">Informasi & Bantuan</h4>
+                <div class="flex flex-col space-y-1 text-xs">
+                    <button onclick="openInfoModal('terms')" class="text-left text-blue-600 hover:underline">Syarat & Ketentuan</button>
+                    <button onclick="openInfoModal('refund')" class="text-left text-blue-600 hover:underline">Kebijakan Pengembalian (Refund Policy)</button>
+                    <button onclick="openInfoModal('faq')" class="text-left text-blue-600 hover:underline">FAQ (Pertanyaan Umum)</button>
                 </div>
-
-                <button onclick="openCheckoutModal()" id="btnCheckout" disabled class="w-full bg-slate-800 text-slate-500 font-bold py-3.5 rounded-xl text-sm transition flex items-center justify-center gap-2 cursor-not-allowed">
-                    <i class="fa-solid fa-credit-card"></i> Lanjut Ke Pembayaran
-                </button>
             </div>
         </div>
-    </div>
-
-    <!-- CHECKOUT & PAYMENT MODAL -->
-    <div id="checkoutModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md overflow-y-auto">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl my-8">
-            <button onclick="closeCheckoutModal()" class="absolute right-5 top-5 text-slate-400 hover:text-white p-2">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-
-            <h3 class="text-xl font-bold text-white mb-1 flex items-center gap-2">
-                <i class="fa-solid fa-shield-check text-brand-500"></i> Checkout Pembayaran
-            </h3>
-            <p class="text-xs text-slate-400 mb-6">Selesaikan pembayaran untuk memproses pesanan Anda.</p>
-
-            <!-- Order Summary Simple Box -->
-            <div class="bg-slate-950 rounded-2xl p-4 border border-slate-800 mb-6 text-xs space-y-2">
-                <div class="flex justify-between text-slate-400">
-                    <span>Ringkasan Item</span>
-                    <span id="modalItemCount" class="text-white font-semibold">0 Item</span>
-                </div>
-                <div class="flex justify-between text-slate-400">
-                    <span>Total Tagihan</span>
-                    <span id="modalTotalAmount" class="text-brand-500 font-bold text-sm">Rp 0</span>
-                </div>
-            </div>
-
-            <!-- Payment Method Selector -->
-            <div class="space-y-4 mb-6">
-                <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">Pilih Metode Pembayaran</label>
-                
-                <div class="grid grid-cols-2 gap-3">
-                    <label class="payment-option cursor-pointer">
-                        <input type="radio" name="paymentMethod" value="qris" checked class="peer hidden">
-                        <div class="p-3.5 rounded-xl border border-slate-800 bg-slate-950 peer-checked:border-brand-500 peer-checked:bg-brand-500/10 flex items-center gap-3 transition">
-                            <i class="fa-solid fa-qrcode text-brand-500 text-lg"></i>
-                            <div>
-                                <div class="text-xs font-bold text-white">QRIS All Payment</div>
-                                <div class="text-[10px] text-slate-400">Instant Verification</div>
-                            </div>
-                        </div>
-                    </label>
-                    <label class="payment-option cursor-pointer">
-                        <input type="radio" name="paymentMethod" value="ewallet" class="peer hidden">
-                        <div class="p-3.5 rounded-xl border border-slate-800 bg-slate-950 peer-checked:border-brand-500 peer-checked:bg-brand-500/10 flex items-center gap-3 transition">
-                            <i class="fa-solid fa-wallet text-cyan-400 text-lg"></i>
-                            <div>
-                                <div class="text-xs font-bold text-white">E-Wallet</div>
-                                <div class="text-[10px] text-slate-400">OVO, DANA, GoPay</div>
-                            </div>
-                        </div>
-                    </label>
-                    <label class="payment-option cursor-pointer">
-                        <input type="radio" name="paymentMethod" value="bank" class="peer hidden">
-                        <div class="p-3.5 rounded-xl border border-slate-800 bg-slate-950 peer-checked:border-brand-500 peer-checked:bg-brand-500/10 flex items-center gap-3 transition">
-                            <i class="fa-solid fa-building-columns text-yellow-400 text-lg"></i>
-                            <div>
-                                <div class="text-xs font-bold text-white">Transfer Bank</div>
-                                <div class="text-[10px] text-slate-400">BCA, Mandiri, BRI</div>
-                            </div>
-                        </div>
-                    </label>
-                    <label class="payment-option cursor-pointer">
-                        <input type="radio" name="paymentMethod" value="cod" class="peer hidden">
-                        <div class="p-3.5 rounded-xl border border-slate-800 bg-slate-950 peer-checked:border-brand-500 peer-checked:bg-brand-500/10 flex items-center gap-3 transition">
-                            <i class="fa-solid fa-hand-holding-dollar text-purple-400 text-lg"></i>
-                            <div>
-                                <div class="text-xs font-bold text-white">Bayar di Toko / COD</div>
-                                <div class="text-[10px] text-slate-400">Ambil di Konter</div>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-            </div>
-
-            <!-- Customer Notes -->
-            <div class="mb-6">
-                <label class="block text-xs font-medium text-slate-400 mb-2">Catatan Tambahan (Opsional)</label>
-                <input type="text" id="customerNote" placeholder="Contoh: Titip di kasir / Warna casing hitam" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brand-500">
-            </div>
-
-            <!-- Confirm Order Button -->
-            <button onclick="processFinalPayment()" class="w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-slate-950 font-extrabold py-3.5 rounded-xl text-sm transition shadow-lg shadow-brand-500/25 active:scale-95">
-                Konfirmasi & Bayar Sekarang
-            </button>
-        </div>
-    </div>
-
-    <!-- QRIS SIMULATION MODAL -->
-    <div id="qrisModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full p-6 text-center relative shadow-2xl">
-            <div class="w-12 h-12 bg-brand-500/10 border border-brand-500/20 text-brand-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fa-solid fa-qrcode text-xl"></i>
-            </div>
-            <h3 class="text-lg font-bold text-white mb-1">Scan QRIS Pembayaran</h3>
-            <p class="text-xs text-slate-400 mb-4">Buka aplikasi e-wallet atau m-banking lalu scan kode di bawah ini.</p>
-            
-            <!-- QR Placeholder -->
-            <div class="bg-white p-4 rounded-2xl inline-block mb-4 border-4 border-slate-800">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=INDOSAKU-OFFICIAL-PAYMENT" alt="QRIS Code" class="w-44 h-44 mx-auto">
-            </div>
-
-            <div class="text-xs text-slate-400 mb-6">
-                Batas Waktu Pembayaran: <span id="paymentTimer" class="text-yellow-400 font-mono font-bold">14:59</span>
-            </div>
-
-            <button onclick="simulatePaymentSuccess()" class="w-full bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold py-3 rounded-xl text-xs transition mb-2">
-                Simulasi Pembayaran Berhasil (Demo)
-            </button>
-            <button onclick="closeQrisModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold py-2.5 rounded-xl text-xs transition">
-                Batalkan
-            </button>
-        </div>
-    </div>
-
-    <!-- SUCCESS NOTIFICATION TOAST -->
-    <div id="toastNotification" class="fixed bottom-6 right-6 z-50 bg-slate-900 border border-brand-500/50 text-white px-5 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
-        <div class="w-8 h-8 rounded-full bg-brand-500/20 text-brand-500 flex items-center justify-center text-sm font-bold shrink-0">
-            <i class="fa-solid fa-check"></i>
-        </div>
-        <div>
-            <div id="toastTitle" class="font-bold text-xs text-white">Berhasil!</div>
-            <div id="toastMessage" class="text-[11px] text-slate-400">Item berhasil ditambahkan.</div>
-        </div>
-    </div>
-
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 border-t border-slate-900 text-slate-400 text-xs py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-                
-                <!-- Col 1: Store Bio -->
-                <div class="space-y-4">
-                    <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-slate-950 font-black text-base">IS</div>
-                        <span class="text-xl font-bold text-white">INDOSAKU</span>
-                    </div>
-                    <p class="leading-relaxed text-slate-500">
-                        Pusat pengisian pulsa online, kuota data terdekat, layanan pembayaran PPOB, serta penjualan aksesoris smartphone berkualitas dengan harga terjangkau.
-                    </p>
-                </div>
-
-                <!-- Col 2: Jam Operasional -->
-                <div>
-                    <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-[11px]">Jam Operasional Toko</h4>
-                    <ul class="space-y-2">
-                        <li class="flex justify-between border-b border-slate-900 pb-1.5">
-                            <span>Senin - Sabtu:</span>
-                            <span class="text-slate-200">08:00 - 22:00 WIB</span>
-                        </li>
-                        <li class="flex justify-between border-b border-slate-900 pb-1.5">
-                            <span>Minggu / Libur:</span>
-                            <span class="text-slate-200">09:00 - 21:00 WIB</span>
-                        </li>
-                        <li class="flex justify-between pt-1">
-                            <span>Transaksi Digital:</span>
-                            <span class="text-brand-500 font-bold">24 Jam Otomatis</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Col 3: Lokasi Konter -->
-                <div>
-                    <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-[11px]">Alamat Konter Physical</h4>
-                    <p class="leading-relaxed text-slate-400 mb-2">
-                        <i class="fa-solid fa-location-dot text-brand-500 mr-1"></i> Jl. Raya Pemda No. 45, Cibinong, Kab. Bogor, Jawa Barat 16911
-                    </p>
-                    <p class="text-slate-500">Patokan: 100m dari SPBU Pemda Cibinong</p>
-                </div>
-
-                <!-- Col 4: Kontak & CS -->
-                <div>
-                    <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-[11px]">Bantuan & Layanan CS</h4>
-                    <div class="space-y-2.5">
-                        <a href="https://wa.me/6281234567890" target="_blank" class="flex items-center gap-2 text-slate-300 hover:text-brand-500 transition">
-                            <i class="fa-brands fa-whatsapp text-lg text-emerald-400"></i> WhatsApp CS: 0812-3456-7890
-                        </a>
-                        <div class="flex items-center gap-2 text-slate-400">
-                            <i class="fa-solid fa-envelope text-slate-500"></i> support@indosaku.id
-                        </div>
-                        <div class="flex items-center gap-2 text-slate-400">
-                            <i class="fa-brands fa-instagram text-pink-500"></i> @indosaku_official
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Bottom Line -->
-            <div class="pt-8 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-500">
-                <p>&copy; 2026 INDOSAKU Counter & Digital Store. All rights reserved.</p>
-                <div class="flex gap-4">
-                    <a href="#" class="hover:underline">Syarat & Ketentuan</a>
-                    <a href="#" class="hover:underline">Kebijakan Privasi</a>
-                </div>
-            </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 pt-6 border-t border-gray-100 text-center text-xs text-gray-400">
+            &copy; 2026 INDOSAKU. All rights reserved.
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        /* ==========================================
-           1. DATA PRODUCTS & OPERATOR NOMINALS
-           ========================================== */
-        const operatorRules = [
-            { name: 'Telkomsel', icon: '🔴', prefixes: ['0811','0812','0813','0821','0822','0823','0851','0852','0853'] },
-            { name: 'Indosat Ooredoo', icon: '🟡', prefixes: ['0814','0815','0816','0855','0856','0857','0858'] },
-            { name: 'XL Axiata', icon: '🔵', prefixes: ['0817','0818','0819','0859','0877','0878'] },
-            { name: 'Tri (3)', icon: '🟠', prefixes: ['0895','0896','0897','0898','0899'] },
-            { name: 'Smartfren', icon: '🔴', prefixes: ['0881','0882','0883','0884','0885','0886','0887','0888','0889'] }
-        ];
+    <!-- Drawer Keranjang Belanja -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex justify-end">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col transform transition-transform duration-300">
+            <div class="p-4 border-b border-gray-100 flex items-center justify-between">
+                <h3 class="font-bold text-lg text-gray-900 flex items-center space-x-2">
+                    <i class="fa-solid fa-cart-shopping text-blue-600"></i>
+                    <span>Keranjang Pesanan</span>
+                </h3>
+                <button onclick="toggleCart()" class="text-gray-400 hover:text-gray-600 p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            
+            <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <!-- Dinamis item keranjang -->
+            </div>
 
-        const pulsaPackages = [
-            { id: 'p5', title: 'Pulsa 5.000', price: 6500, type: 'pulsa' },
-            { id: 'p10', title: 'Pulsa 10.000', price: 11500, type: 'pulsa' },
-            { id: 'p20', title: 'Pulsa 20.000', price: 21000, type: 'pulsa' },
-            { id: 'p25', title: 'Pulsa 25.000', price: 26000, type: 'pulsa' },
-            { id: 'p50', title: 'Pulsa 50.000', price: 51000, type: 'pulsa' },
-            { id: 'p100', title: 'Pulsa 100.000', price: 100500, type: 'pulsa' }
-        ];
-
-        const dataPackages = [
-            { id: 'd1', title: 'Data 2.5 GB / 3 Hari', price: 12000, type: 'data' },
-            { id: 'd2', title: 'Data 5 GB / 7 Hari', price: 23000, type: 'data' },
-            { id: 'd3', title: 'Data 10 GB / 30 Hari', price: 45000, type: 'data' },
-            { id: 'd4', title: 'Data 25 GB Unlimited', price: 75000, type: 'data' },
-            { id: 'd5', title: 'Data 50 GB Jumbo 30hr', price: 110000, type: 'data' },
-            { id: 'd6', title: 'Data 100 GB Super Hemat', price: 185000, type: 'data' }
-        ];
-
-        const products = [
-            {
-                id: 'acc-1',
-                title: 'Charger Fast Charging 20W Type-C Original',
-                category: 'charger',
-                price: 85000,
-                rating: 4.9,
-                sold: 1420,
-                badge: 'TERLARIS',
-                img: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500&auto=format&fit=crop&q=80'
-            },
-            {
-                id: 'acc-2',
-                title: 'TWS Earphone Bluetooth 5.3 Bass Boost',
-                category: 'aksesoris',
-                price: 135000,
-                rating: 4.8,
-                sold: 890,
-                badge: 'PROMO',
-                img: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&auto=format&fit=crop&q=80'
-            },
-            {
-                id: 'acc-3',
-                title: 'Kabel Data Braided Type-C to Lightning 1.2m',
-                category: 'charger',
-                price: 35000,
-                rating: 4.7,
-                sold: 2100,
-                badge: '',
-                img: 'https://images.unsplash.com/photo-1616410011236-7a42121dd981?w=500&auto=format&fit=crop&q=80'
-            },
-            {
-                id: 'acc-4',
-                title: 'Tempered Glass Privacy Anti-Spy iPhone / Android',
-                category: 'aksesoris',
-                price: 25000,
-                rating: 4.9,
-                sold: 3400,
-                badge: 'HOT',
-                img: 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=500&auto=format&fit=crop&q=80'
-            },
-            {
-                id: 'v-1',
-                title: 'Voucher Mobile Legends 86 Diamonds',
-                category: 'voucher',
-                price: 22000,
-                rating: 5.0,
-                sold: 5200,
-                badge: 'INSTANT',
-                img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&auto=format&fit=crop&q=80'
-            },
-            {
-                id: 'v-2',
-                title: 'Voucher Free Fire 140 Diamonds',
-                category: 'voucher',
-                price: 19500,
-                rating: 4.9,
-                sold: 4100,
-                badge: 'INSTANT',
-                img: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&auto=format&fit=crop&q=80'
-            },
-            {
-                id: 'p-1',
-                title: 'Token PLN Listrik Prabayar Rp 100.000',
-                category: 'ppob',
-                price: 101500,
-                rating: 5.0,
-                sold: 6300,
-                badge: 'RESMI',
-                img: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=500&auto=format&fit=crop&q=80'
-            },
-            {
-                id: 'acc-5',
-                title: 'Holder HP Mobil Vacuum Magnetic 360 Degree',
-                category: 'aksesoris',
-                price: 45000,
-                rating: 4.6,
-                sold: 670,
-                badge: '',
-                img: 'https://images.unsplash.com/photo-1586105251261-72a756497a11?w=500&auto=format&fit=crop&q=80'
-            }
-        ];
-
-        /* ==========================================
-           2. APP STATE
-           ========================================== */
-        let cart = [];
-        let selectedPulsaItem = null;
-        let currentPulsaTab = 'pulsa';
-        let detectedOp = null;
-
-        /* ==========================================
-           3. INITIALIZATION
-           ========================================== */
-        document.addEventListener('DOMContentLoaded', () => {
-            renderPulsaItems();
-            renderProducts(products);
-        });
-
-        /* ==========================================
-           4. PULSA & DATA LOGIC
-           ========================================== */
-        function detectOperator() {
-            const num = document.getElementById('phoneNumber').value.trim();
-            const badge = document.getElementById('operatorBadge');
-            const opName = document.getElementById('opName');
-            const opIcon = document.getElementById('opIcon');
-            const err = document.getElementById('phoneError');
-
-            if (num.length >= 4) {
-                const prefix = num.substring(0, 4);
-                detectedOp = operatorRules.find(op => op.prefixes.includes(prefix));
-
-                if (detectedOp) {
-                    badge.classList.remove('hidden');
-                    badge.classList.add('flex');
-                    opName.innerText = detectedOp.name;
-                    opIcon.innerText = detectedOp.icon;
-                    err.classList.add('hidden');
-                } else {
-                    badge.classList.add('hidden');
-                    badge.classList.remove('flex');
-                }
-            } else {
-                badge.classList.add('hidden');
-                badge.classList.remove('flex');
-                detectedOp = null;
-            }
-
-            validatePulsaForm();
-        }
-
-        function switchPulsaTab(tab) {
-            currentPulsaTab = tab;
-            const pulsaBtn = document.getElementById('tabPulsaBtn');
-            const dataBtn = document.getElementById('tabDataBtn');
-
-            if (tab === 'pulsa') {
-                pulsaBtn.className = 'flex-1 py-2 rounded-lg text-xs font-bold transition bg-brand-500 text-slate-950';
-                dataBtn.className = 'flex-1 py-2 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white';
-            } else {
-                dataBtn.className = 'flex-1 py-2 rounded-lg text-xs font-bold transition bg-brand-500 text-slate-950';
-                pulsaBtn.className = 'flex-1 py-2 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white';
-            }
-            selectedPulsaItem = null;
-            document.getElementById('selectedProductPrice').innerText = 'Rp 0';
-            renderPulsaItems();
-            validatePulsaForm();
-        }
-
-        function renderPulsaItems() {
-            const container = document.getElementById('nominalGrid');
-            const items = currentPulsaTab === 'pulsa' ? pulsaPackages : dataPackages;
-
-            container.innerHTML = items.map(item => `
-                <div onclick="selectPulsaItem('${item.id}')" id="pulsa-card-${item.id}" class="pulsa-card border border-slate-800 bg-slate-950/80 hover:border-slate-700 p-3.5 rounded-2xl cursor-pointer transition flex flex-col justify-between">
-                    <div>
-                        <div class="text-xs font-bold text-white mb-1">${item.title}</div>
-                        <div class="text-[10px] text-slate-400">Stok Tersedia</div>
-                    </div>
-                    <div class="mt-3 text-xs font-black text-brand-500">
-                        Rp ${item.price.toLocaleString('id-ID')}
-                    </div>
+            <div class="p-4 border-t border-gray-100 bg-gray-50 space-y-3">
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-600">Total Pembayaran:</span>
+                    <span id="cart-total" class="font-bold text-lg text-blue-600">Rp 0</span>
                 </div>
-            `).join('');
-        }
+                <button onclick="openCheckoutModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-md">
+                    Lanjut ke Pembayaran
+                </button>
+            </div>
+        </div>
+    </div>
 
-        function selectPulsaItem(id) {
-            const items = currentPulsaTab === 'pulsa' ? pulsaPackages : dataPackages;
-            selectedPulsaItem = items.find(i => i.id === id);
+    <!-- Modal Checkout & Pembayaran -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-5">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-lg text-gray-900">Konfirmasi & Pembayaran</h3>
+                <button onclick="closeCheckoutModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nama Pemesan</label>
+                    <input type="text" id="buyer-name" placeholder="Masukkan nama lengkap" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Metode Pembayaran (iPaymu / QRIS)</label>
+                    <select id="payment-method" class="w-full px-3 py-2 border rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        <option value="qris">QRIS (Scan All Banking / E-Wallet via iPaymu)</option>
+                        <option value="va">Virtual Account (BCA/BRI/Mandiri)</option>
+                        <option value="ewallet">DANA / OVO / GoPay</option>
+                    </select>
+                </div>
+                
+                <!-- Simulasi QRIS / Payment Gateway -->
+                <div id="qris-simulation" class="bg-gray-50 p-4 rounded-xl border border-dashed border-gray-300 text-center space-y-2">
+                    <p class="text-xs text-gray-500 font-medium">Scan QRIS / Selesaikan Pembayaran:</p>
+                    <div class="bg-white p-3 inline-block rounded-xl shadow-inner border">
+                        <i class="fa-solid fa-qrcode text-7xl text-blue-600"></i>
+                    </div>
+                    <p class="text-xs font-semibold text-gray-700">INDOSAKU OFFICIAL STORE</p>
+                    <p class="text-xs text-red-500 font-bold">Batas Waktu: <span id="countdown">05:00</span></p>
+                </div>
 
-            document.querySelectorAll('.pulsa-card').forEach(el => {
-                el.classList.remove('border-brand-500', 'bg-brand-500/10');
-            });
+                <button onclick="processOrder()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl transition shadow-md">
+                    Konfirmasi & Buat Pesanan
+                </button>
+            </div>
+        </div>
+    </div>
 
-            const activeCard = document.getElementById(`pulsa-card-${id}`);
-            if (activeCard) {
-                activeCard.classList.add('border-brand-500', 'bg-brand-500/10');
-            }
+    <!-- Modal Informasi (Terms, Refund, FAQ) -->
+    <div id="info-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b pb-3 sticky top-0 bg-white">
+                <h3 id="info-title" class="font-bold text-lg text-gray-900">Informasi</h3>
+                <button onclick="closeInfoModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div id="info-content" class="text-xs sm:text-sm text-gray-600 space-y-3 leading-relaxed">
+                <!-- Konten dinamis -->
+            </div>
+        </div>
+    </div>
 
-            document.getElementById('selectedProductPrice').innerText = `Rp ${selectedPulsaItem.price.toLocaleString('id-ID')}`;
-            validatePulsaForm();
-        }
+    <!-- JavaScript Aplikasi -->
+    <script>
+        // Data Produk Aksesoris Lengkap
+        const products = [
+            { id: 1, name: 'Softcase Silikon Anti-Crack', category: 'Case', price: 25000, rating: 4.8, image: 'https://images.unsplash.com/photo-1601593346740-92561ae008cf?auto=format&fit=crop&w=300&q=80' },
+            { id: 2, name: 'Hardcase Matte Black Premium', category: 'Case', price: 35000, rating: 4.7, image: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=300&q=80' },
+            { id: 3, name: 'Tempered Glass Full Glue 9H', category: 'Protektor', price: 20000, rating: 4.9, image: 'https://images.unsplash.com/photo-1585060544812-6b45742d762f?auto=format&fit=crop&w=300&q=80' },
+            { id: 4, name: 'Kamera Protector Tempered Glass', category: 'Protektor', price: 15000, rating: 4.8, image: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=300&q=80' },
+            { id: 5, name: 'Fast Charger Adapter 33W Original', category: 'Charger', price: 75000, rating: 4.7, image: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=300&q=80' },
+            { id: 6, name: 'Kabel Data Type-C Fast Charging 3A', category: 'Charger', price: 30000, rating: 4.6, image: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=300&q=80' },
+            { id: 7, name: 'Desktop Wireless Charger Pad', category: 'Charger', price: 95000, rating: 4.9, image: 'https://images.unsplash.com/photo-1622445275576-721325763dc0?auto=format&fit=crop&w=300&q=80' },
+            { id: 8, name: 'Headset / Earphone Bass Ori', category: 'Audio', price: 45000, rating: 4.8, image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=300&q=80' },
+            { id: 9, name: 'TWS Bluetooth Wireless Earbuds Pro', category: 'Audio', price: 125000, rating: 4.9, image: 'https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?auto=format&fit=crop&w=300&q=80' },
+            { id: 10, name: 'Aux Audio Cable 3.5mm to Speaker', category: 'Audio', price: 20000, rating: 4.5, image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=300&q=80' }
+        ];
 
-        function validatePulsaForm() {
-            const phone = document.getElementById('phoneNumber').value.trim();
-            const btn = document.getElementById('btnBuyPulsa');
+        let cart = [];
 
-            if (phone.length >= 10 && selectedPulsaItem) {
-                btn.disabled = false;
-                btn.className = 'bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-slate-950 font-extrabold px-6 py-3 rounded-xl text-sm transition flex items-center gap-2 shadow-lg shadow-brand-500/20 active:scale-95 cursor-pointer';
+        window.onload = function() {
+            renderProducts(products);
+        };
+
+        // Switch Tab Navigasi
+        function switchTab(tab) {
+            const btnPulsa = document.getElementById('btn-pulsa');
+            const btnAksesoris = document.getElementById('btn-aksesoris');
+            const tabPulsa = document.getElementById('tab-pulsa');
+            const tabAksesoris = document.getElementById('tab-aksesoris');
+
+            if(tab === 'pulsa') {
+                btnPulsa.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-blue-600 text-white shadow-sm flex items-center space-x-2 whitespace-nowrap";
+                btnAksesoris.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center space-x-2 whitespace-nowrap";
+                tabPulsa.classList.remove('hidden');
+                tabAksesoris.classList.add('hidden');
             } else {
-                btn.disabled = true;
-                btn.className = 'bg-slate-800 text-slate-500 font-bold px-6 py-3 rounded-xl text-sm transition flex items-center gap-2 cursor-not-allowed';
+                btnAksesoris.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-blue-600 text-white shadow-sm flex items-center space-x-2 whitespace-nowrap";
+                btnPulsa.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center space-x-2 whitespace-nowrap";
+                tabAksesoris.classList.remove('hidden');
+                tabPulsa.classList.add('hidden');
             }
         }
 
-        function processPulsaOrder() {
-            const phone = document.getElementById('phoneNumber').value.trim();
-            if (!selectedPulsaItem || phone.length < 10) return;
+        // Deteksi Operator Telepon
+        function detectOperator(number) {
+            const cleanNum = number.replace(/\D/g, '');
+            const badge = document.getElementById('operator-badge');
+            const nominalSection = document.getElementById('nominal-section');
+            const nominalGrid = document.getElementById('nominal-grid');
 
-            const pulsaCartItem = {
-                id: `pulsa-${Date.now()}`,
-                title: `${selectedPulsaItem.title} (${detectedOp ? detectedOp.name : 'All Op'})`,
-                price: selectedPulsaItem.price,
-                img: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=500&auto=format&fit=crop&q=80',
-                qty: 1,
-                note: `Nomor Tujuan: ${phone}`
-            };
-
-            addToCart(pulsaCartItem);
-            showToast('Ditambahkan ke Keranjang', `${selectedPulsaItem.title} untuk ${phone}`);
-            toggleCartDrawer(true);
-        }
-
-        /* ==========================================
-           5. PRODUCT CATALOG FILTER & DISPLAY
-           ========================================== */
-        function renderProducts(items) {
-            const grid = document.getElementById('productGrid');
-            const empty = document.getElementById('emptyState');
-
-            if (items.length === 0) {
-                grid.innerHTML = '';
-                empty.classList.remove('hidden');
+            if (cleanNum.length < 4) {
+                badge.innerText = "Operator";
+                badge.className = "absolute right-3 top-2.5 text-xs font-bold px-2.5 py-1.5 rounded-lg bg-gray-200 text-gray-600 uppercase";
+                nominalSection.classList.add('hidden');
                 return;
             }
 
-            empty.classList.add('hidden');
+            let operator = "Unknown";
+            let color = "bg-gray-200 text-gray-600";
+            let listPulsa = [];
+
+            if (['0811', '0812', '0813', '0821', '0822', '0823', '0851', '0852', '0853'].some(p => cleanNum.startsWith(p))) {
+                operator = "Telkomsel"; color = "bg-red-100 text-red-600";
+                listPulsa = [10000, 20000, 25000, 50000, 100000, 150000];
+            } else if (['0814', '0815', '0816', '0855', '0856', '0857', '0858'].some(p => cleanNum.startsWith(p))) {
+                operator = "Indosat"; color = "bg-yellow-100 text-yellow-700";
+                listPulsa = [10000, 15000, 25000, 50000, 100000];
+            } else if (['0817', '0818', '0819', '0859', '0877', '0878'].some(p => cleanNum.startsWith(p))) {
+                operator = "XL / Axis"; color = "bg-blue-100 text-blue-600";
+                listPulsa = [10000, 15000, 25000, 50000, 100000];
+            } else if (['0895', '0896', '0897', '0898', '0899'].some(p => cleanNum.startsWith(p))) {
+                operator = "Tri (3)"; color = "bg-indigo-100 text-indigo-600";
+                listPulsa = [10000, 20000, 30000, 50000, 100000];
+            } else if (['0881', '0882', '0883', '0884', '0885', '0886', '0887', '0888', '0889'].some(p => cleanNum.startsWith(p))) {
+                operator = "Smartfren"; color = "bg-purple-100 text-purple-600";
+                listPulsa = [10000, 20000, 25000, 50000, 100000];
+            }
+
+            badge.innerText = operator;
+            badge.className = `absolute right-3 top-2.5 text-xs font-bold px-2.5 py-1.5 rounded-lg ${color} uppercase`;
+
+            if (operator !== "Unknown") {
+                nominalSection.classList.remove('hidden');
+                nominalGrid.innerHTML = listPulsa.map(nominal => `
+                    <button onclick="addPulsaToCart('${operator}', ${nominal})" class="p-3 bg-white border border-gray-200 hover:border-blue-500 hover:bg-blue-50/50 rounded-xl text-left transition shadow-sm">
+                        <div class="text-xs text-gray-500 font-medium">Pulsa ${operator}</div>
+                        <div class="text-sm font-bold text-gray-900 mt-1">Rp ${nominal.toLocaleString('id-ID')}</div>
+                    </button>
+                `).join('');
+            } else {
+                nominalSection.classList.add('hidden');
+            }
+        }
+
+        // Render Katalog Produk
+        function renderProducts(items) {
+            const grid = document.getElementById('product-grid');
+            if(items.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-8 text-gray-400">Produk tidak ditemukan</div>`;
+                return;
+            }
             grid.innerHTML = items.map(p => `
-                <div class="bg-slate-900 border border-slate-800/80 rounded-2xl overflow-hidden hover:border-slate-700 transition duration-300 flex flex-col group">
-                    <div class="relative overflow-hidden aspect-square">
-                        <img src="${p.img}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        ${p.badge ? `<span class="absolute top-3 left-3 bg-brand-500 text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">${p.badge}</span>` : ''}
+                <div class="bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <div class="bg-gray-100 rounded-xl overflow-hidden aspect-square mb-3">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded">${p.category}</span>
+                        <h4 class="font-bold text-sm text-gray-900 mt-1.5 line-clamp-2">${p.name}</h4>
                     </div>
-                    <div class="p-4 flex-grow flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center gap-1 text-[11px] text-amber-400 mb-1">
-                                <i class="fa-solid fa-star"></i>
-                                <span class="font-bold text-slate-300">${p.rating}</span>
-                                <span class="text-slate-500">(${p.sold}+ Terjual)</span>
-                            </div>
-                            <h3 class="font-semibold text-white text-sm line-clamp-2 leading-snug group-hover:text-brand-500 transition">${p.title}</h3>
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-extrabold text-blue-600 text-sm">Rp ${p.price.toLocaleString('id-ID')}</span>
+                            <span class="text-xs text-gray-500"><i class="fa-solid fa-star text-amber-400"></i> ${p.rating}</span>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
-                            <div>
-                                <span class="text-[10px] text-slate-400 block">Harga Pas</span>
-                                <span class="text-base font-bold text-brand-500">Rp ${p.price.toLocaleString('id-ID')}</span>
-                            </div>
-                            <button onclick="addCatalogToCart('${p.id}')" class="p-2.5 rounded-xl bg-slate-800 hover:bg-brand-500 hover:text-slate-950 text-brand-500 transition active:scale-90">
-                                <i class="fa-solid fa-cart-plus text-base"></i>
-                            </button>
-                        </div>
+                        <button onclick="addToCart(${p.id})" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">
+                            + Keranjang
+                        </button>
                     </div>
                 </div>
             `).join('');
         }
 
+        // Filter & Pencarian Aksesoris
         function filterCategory(cat) {
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.className = 'category-btn px-5 py-2.5 rounded-full border border-slate-800 bg-slate-900 text-slate-400 hover:border-slate-700 hover:text-white text-xs font-medium whitespace-nowrap transition';
+            ['all', 'Case', 'Charger', 'Audio', 'Protektor'].forEach(c => {
+                const btn = document.getElementById(`cat-${c.toLowerCase()}`);
+                if(btn) btn.className = c === cat ? "px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white whitespace-nowrap" : "px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-600 border border-gray-200 hover:bg-gray-100 whitespace-nowrap";
             });
-            event.currentTarget.className = 'category-btn active px-5 py-2.5 rounded-full border border-brand-500 bg-brand-500/10 text-brand-500 text-xs font-bold whitespace-nowrap transition';
-
-            if (cat === 'all') {
-                renderProducts(products);
-            } else {
-                const filtered = products.filter(p => p.category === cat);
-                renderProducts(filtered);
-            }
+            if(cat === 'all') renderProducts(products);
+            else renderProducts(products.filter(p => p.category === cat));
         }
 
-        function handleSearch() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = products.filter(p => p.title.toLowerCase().includes(query));
+        function searchProducts(keyword) {
+            const filtered = products.filter(p => p.name.toLowerCase().includes(keyword.toLowerCase()));
             renderProducts(filtered);
         }
 
-        function handleSearchMobile() {
-            const query = document.getElementById('searchInputMobile').value.toLowerCase();
-            const filtered = products.filter(p => p.title.toLowerCase().includes(query));
-            renderProducts(filtered);
-        }
-
-        /* ==========================================
-           6. SHOPPING CART LOGIC
-           ========================================== */
-        function addCatalogToCart(id) {
-            const item = products.find(p => p.id === id);
-            if (!item) return;
-
-            const existingIndex = cart.findIndex(c => c.id === id);
-            if (existingIndex > -1) {
-                cart[existingIndex].qty += 1;
+        // Manajemen Keranjang
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId && !item.isPulsa);
+            if(existing) {
+                existing.qty++;
             } else {
-                cart.push({ ...item, qty: 1 });
+                cart.push({ ...product, qty: 1, isPulsa: false });
             }
-
             updateCartUI();
-            showToast('Ditambahkan!', `${item.title} ada di keranjang.`);
+            toggleCart();
         }
 
-        function addToCart(customItem) {
-            cart.push(customItem);
+        function addPulsaToCart(operator, nominal) {
+            const phone = document.getElementById('phone-input').value;
+            const cartId = `pulsa-${operator}-${nominal}-${phone}`;
+            const existing = cart.find(item => item.cartId === cartId);
+            if(existing) {
+                existing.qty++;
+            } else {
+                cart.push({
+                    cartId: cartId,
+                    name: `Pulsa ${operator} ${nominal.toLocaleString('id-ID')} (${phone})`,
+                    price: nominal,
+                    qty: 1,
+                    isPulsa: true
+                });
+            }
             updateCartUI();
+            toggleCart();
         }
 
         function updateCartUI() {
-            const container = document.getElementById('cartItemsContainer');
-            const badge = document.getElementById('cartCountBadge');
-            const subtotalEl = document.getElementById('cartSubtotal');
-            const totalEl = document.getElementById('cartTotal');
-            const checkoutBtn = document.getElementById('btnCheckout');
+            const badge = document.getElementById('cart-badge');
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
 
-            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-            // Update Badge
-            badge.innerText = totalItems;
-            if (totalItems > 0) {
-                badge.classList.remove('scale-0');
+            if(totalQty > 0) {
+                badge.innerText = totalQty;
+                badge.classList.remove('hidden');
             } else {
-                badge.classList.add('scale-0');
+                badge.classList.add('hidden');
             }
 
-            // Update Cart Drawer Items
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-12 text-slate-500">
-                        <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-slate-700"></i>
-                        <p class="text-xs">Keranjang Anda masih kosong</p>
-                    </div>
-                `;
-                checkoutBtn.disabled = true;
-                checkoutBtn.className = 'w-full bg-slate-800 text-slate-500 font-bold py-3.5 rounded-xl text-sm transition flex items-center justify-center gap-2 cursor-not-allowed';
+            if(cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-gray-400">Keranjang masih kosong</div>`;
             } else {
                 container.innerHTML = cart.map((item, index) => `
-                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex gap-3 items-center">
-                        <img src="${item.img}" alt="${item.title}" class="w-14 h-14 object-cover rounded-lg shrink-0">
-                        <div class="flex-grow min-w-0">
-                            <h4 class="text-xs font-semibold text-white truncate">${item.title}</h4>
-                            ${item.note ? `<p class="text-[10px] text-brand-500 truncate">${item.note}</p>` : ''}
-                            <div class="text-xs font-bold text-slate-300 mt-1">Rp ${item.price.toLocaleString('id-ID')}</div>
+                    <div class="flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <div class="flex-1 pr-2">
+                            <h5 class="font-bold text-xs text-gray-900">${item.name}</h5>
+                            <span class="text-xs text-blue-600 font-semibold">Rp ${(item.price * item.qty).toLocaleString('id-ID')}</span>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <div class="flex items-center border border-slate-800 rounded-lg bg-slate-900">
-                                <button onclick="changeQty(${index}, -1)" class="px-2 py-1 text-xs text-slate-400 hover:text-white">-</button>
-                                <span class="px-2 text-xs font-bold text-white">${item.qty}</span>
-                                <button onclick="changeQty(${index}, 1)" class="px-2 py-1 text-xs text-slate-400 hover:text-white">+</button>
-                            </div>
-                            <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-300 p-1">
-                                <i class="fa-solid fa-trash-can text-xs"></i>
-                            </button>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="changeQty(${index}, -1)" class="w-6 h-6 bg-white border rounded flex items-center justify-center text-xs font-bold">-</button>
+                            <span class="text-xs font-bold">${item.qty}</span>
+                            <button onclick="changeQty(${index}, 1)" class="w-6 h-6 bg-white border rounded flex items-center justify-center text-xs font-bold">+</button>
                         </div>
                     </div>
                 `).join('');
-
-                checkoutBtn.disabled = false;
-                checkoutBtn.className = 'w-full bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-slate-950 font-bold py-3.5 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-brand-500/20 active:scale-95 cursor-pointer';
             }
-
-            subtotalEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
             totalEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
         }
 
         function changeQty(index, delta) {
             cart[index].qty += delta;
-            if (cart[index].qty <= 0) {
-                cart.splice(index, 1);
-            }
+            if(cart[index].qty <= 0) cart.splice(index, 1);
             updateCartUI();
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('hidden');
         }
 
-        function toggleCartDrawer(forceOpen = false) {
-            const drawer = document.getElementById('cartDrawer');
-            const panel = document.getElementById('cartPanel');
-
-            if (forceOpen || drawer.classList.contains('pointer-events-none')) {
-                drawer.classList.remove('pointer-events-none', 'opacity-0');
-                panel.classList.remove('translate-x-full');
-            } else {
-                drawer.classList.add('pointer-events-none', 'opacity-0');
-                panel.classList.add('translate-x-full');
-            }
-        }
-
-        /* ==========================================
-           7. CHECKOUT & PAYMENT MODALS
-           ========================================== */
         function openCheckoutModal() {
-            if (cart.length === 0) return;
-            toggleCartDrawer(false);
-
-            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const count = cart.reduce((sum, item) => sum + item.qty, 0);
-
-            document.getElementById('modalItemCount').innerText = `${count} Item`;
-            document.getElementById('modalTotalAmount').innerText = `Rp ${total.toLocaleString('id-ID')}`;
-            
-            document.getElementById('checkoutModal').classList.remove('hidden');
-            document.getElementById('checkoutModal').classList.add('flex');
+            if(cart.length === 0) {
+                alert('Keranjang belanja Anda masih kosong!');
+                return;
+            }
+            toggleCart();
+            document.getElementById('checkout-modal').classList.remove('hidden');
         }
 
         function closeCheckoutModal() {
-            document.getElementById('checkoutModal').classList.add('hidden');
-            document.getElementById('checkoutModal').classList.remove('flex');
+            document.getElementById('checkout-modal').classList.add('hidden');
         }
 
-        function processFinalPayment() {
-            const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked').value;
-            closeCheckoutModal();
-
-            if (selectedPayment === 'qris' || selectedPayment === 'ewallet') {
-                document.getElementById('qrisModal').classList.remove('hidden');
-                document.getElementById('qrisModal').classList.add('flex');
-                startPaymentTimer();
-            } else {
-                showToast('Pesanan Dibuat!', 'Instruksi pembayaran dikirim via WhatsApp CS.');
-                cart = [];
-                updateCartUI();
+        function processOrder() {
+            const name = document.getElementById('buyer-name').value;
+            if(!name) {
+                alert('Mohon masukkan nama pemesan terlebih dahulu.');
+                return;
             }
-        }
-
-        function closeQrisModal() {
-            document.getElementById('qrisModal').classList.add('hidden');
-            document.getElementById('qrisModal').classList.remove('flex');
-        }
-
-        function simulatePaymentSuccess() {
-            closeQrisModal();
+            alert(`Terima kasih ${name}! Pesanan Anda di INDOSAKU berhasil dibuat. Silakan selesaikan pembayaran melalui metode yang dipilih.`);
             cart = [];
             updateCartUI();
-            showToast('Pembayaran Lunas! 🎉', 'Terima kasih, pesanan diproses otomatis.');
+            closeCheckoutModal();
         }
 
-        let timerInterval;
-        function startPaymentTimer() {
-            let duration = 15 * 60; // 15 min
-            const timerDisplay = document.getElementById('paymentTimer');
-            clearInterval(timerInterval);
+        // Informasi Modal (Terms, Refund, FAQ)
+        function openInfoModal(type) {
+            const modal = document.getElementById('info-modal');
+            const titleEl = document.getElementById('info-title');
+            const contentEl = document.getElementById('info-content');
 
-            timerInterval = setInterval(() => {
-                const minutes = Math.floor(duration / 60);
-                const seconds = duration % 60;
-                timerDisplay.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                
-                if (--duration < 0) {
-                    clearInterval(timerInterval);
-                    closeQrisModal();
-                }
-            }, 1000);
+            if(type === 'terms') {
+                titleEl.innerText = "Syarat & Ketentuan";
+                contentEl.innerHTML = `
+                    <p>1. <strong>Layanan Transaksi:</strong> INDOSAKU melayani pembelian pulsa elektrik, paket data, PPOB, dan aksesoris HP secara online maupun offline di wilayah Cibinong, Bogor.</p>
+                    <p>2. <strong>Kesalahan Nomor HP:</strong> Pelanggan bertanggung jawab penuh atas kebenaran nomor handphone atau ID tujuan yang dimasukkan. Transaksi yang sudah sukses terkirim tidak dapat dibatalkan.</p>
+                    <p>3. <strong>Harga:</strong> Harga produk dapat berubah sewaktu-waktu mengikuti kebijakan provider dan distributor.</p>
+                `;
+            } else if(type === 'refund') {
+                titleEl.innerText = "Kebijakan Pengembalian (Refund Policy)";
+                contentEl.innerHTML = `
+                    <p>1. <strong>Produk Digital (Pulsa/Paket Data):</strong> Jika saldo/pulsa gagal masuk akibat gangguan sistem pusat namun status pembayaran telah terverifikasi sukses, dana akan dikembalikan penuh (refund) dalam waktu 1x24 jam.</p>
+                    <p>2. <strong>Produk Fisik (Aksesoris):</strong> Pengembalian atau penukaran barang fisik hanya dapat dilakukan maksimal 1 hari setelah barang diterima, dengan syarat menyertakan video unboxing dan kondisi barang belum rusak/cacat pemakaian.</p>
+                `;
+            } else if(type === 'faq') {
+                titleEl.innerText = "FAQ (Pertanyaan Umum)";
+                contentEl.innerHTML = `
+                    <p><strong>Q: Berapa lama proses pengiriman pulsa?</strong><br>A: Pulsa atau paket data diproses secara instan (1-3 menit) setelah pembayaran dikonfirmasi.</p>
+                    <p><strong>Q: Apakah pembayaran via QRIS aman?</strong><br>A: Ya, seluruh transaksi pembayaran terintegrasi dengan sistem gerbang pembayaran resmi dan aman.</p>
+                    <p><strong>Q: Bagaimana cara menghubungi customer service?</strong><br>A: Anda dapat menghubungi kami melalui email di <strong>aangpratama187@gmail.com</strong> atau WhatsApp ke nomor <strong>08131611563</strong>.</p>
+                `;
+            }
+
+            modal.classList.remove('hidden');
         }
 
-        /* ==========================================
-           8. TOAST NOTIFICATION UTILITY
-           ========================================== */
-        function showToast(title, message) {
-            const toast = document.getElementById('toastNotification');
-            document.getElementById('toastTitle').innerText = title;
-            document.getElementById('toastMessage').innerText = message;
-
-            toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
-            
-            setTimeout(() => {
-                toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
-            }, 3500);
+        function closeInfoModal() {
+            document.getElementById('info-modal').classList.add('hidden');
         }
     </script>
 </body>
