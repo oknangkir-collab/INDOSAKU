@@ -33,9 +33,13 @@
     <header class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="showView('shop')">
-                <!-- Logo Vektor INDOSAKU (Tampil 100% Tanpa URL Luar) -->
-                <div class="bg-gradient-to-tr from-blue-700 to-indigo-500 text-white p-2 rounded-xl flex items-center justify-center w-11 h-11 shadow-md font-black text-xl tracking-tighter">
-                    IS
+                <!-- Logo Baru INDOSAKU (Vektor SVG Inline - Pasti Tampil) -->
+                <div class="w-11 h-11 bg-gradient-to-tr from-blue-700 to-indigo-500 rounded-xl flex items-center justify-center shadow-md p-1">
+                    <svg viewBox="0 0 100 100" class="w-8 h-8 text-white fill-current">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="8"/>
+                        <path d="M35 70 L65 30 M35 30 L65 70" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+                        <circle cx="50" cy="50" r="15" fill="currentColor"/>
+                    </svg>
                 </div>
                 <div>
                     <h1 class="text-xl font-extrabold tracking-tight text-gray-900 leading-none">INDOSAKU</h1>
@@ -173,11 +177,11 @@
                         </div>
                     </div>
 
-                    <!-- Pilihan Pembayaran iPaymu (Tampil Langsung) -->
+                    <!-- Pilihan Pembayaran (Tampil Langsung) -->
                     <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
                         <h3 class="text-md font-bold text-gray-900 flex items-center space-x-2 border-b pb-3">
                             <i class="fa-solid fa-wallet text-blue-600"></i>
-                            <span>2. Pilih Metode Pembayaran (iPaymu Live / Sandbox)</span>
+                            <span>2. Pilih Metode Pembayaran</span>
                         </h3>
 
                         <!-- OPSI QRIS -->
@@ -198,7 +202,7 @@
                             </div>
                         </div>
 
-                        <!-- OPSI VIRTUAL ACCOUNT (LANGSUNG DITAMPILKAN) -->
+                        <!-- OPSI VIRTUAL ACCOUNT -->
                         <div class="space-y-2 pt-2">
                             <label class="block text-xs font-bold text-gray-500 uppercase">Virtual Account (Transfer Bank)</label>
                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -279,7 +283,7 @@
 
                 </div>
 
-                <!-- Rincian Total Pesanan & Tombol Eksekusi iPaymu -->
+                <!-- Rincian Total Pesanan & Tombol Pembayaran -->
                 <div class="space-y-6">
                     <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 sticky top-24 space-y-4">
                         <h3 class="text-md font-bold text-gray-900 border-b pb-3">Ringkasan Pesanan</h3>
@@ -303,13 +307,8 @@
                             </div>
                         </div>
 
-                        <div class="p-3 bg-blue-50 rounded-xl border border-blue-100 text-[11px] text-blue-700 space-y-1">
-                            <p><strong>Merchant VA:</strong> 1179008131611563</p>
-                            <p><strong>Base Endpoint:</strong> https://sandbox.ipaymu.com/api/v2</p>
-                        </div>
-
                         <button id="btn-pay-now" onclick="executeiPaymuPayment()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center space-x-2">
-                            <span>Bayar Sekarang via iPaymu</span>
+                            <span>Bayar Sekarang</span>
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
@@ -389,12 +388,10 @@
 
     <!-- JavaScript Aplikasi -->
     <script>
-        // Kredensial iPaymu
         const IPAYMU_VA = "1179008131611563";
         const IPAYMU_API_KEY = "79E1AB84-2CD2-4409-A6B4-31AA8686E8F1";
         const IPAYMU_BASE_URL = "https://sandbox.ipaymu.com/api/v2";
 
-        // Data Produk Aksesoris (Menggunakan SVG Vector Inline - 100% Bebas Error Gambar)
         const svgIcons = {
             case: `<svg class="w-16 h-16 text-blue-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>`,
             charger: `<svg class="w-16 h-16 text-amber-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
@@ -416,7 +413,6 @@
             renderProducts(products);
         };
 
-        // Navigasi Halaman
         function showView(viewName) {
             if(viewName === 'shop') {
                 document.getElementById('view-shop').classList.remove('hidden');
@@ -428,7 +424,6 @@
             }
         }
 
-        // Switch Tab Navigasi Catalog
         function switchTab(tab) {
             const btnPulsa = document.getElementById('btn-pulsa');
             const btnAksesoris = document.getElementById('btn-aksesoris');
@@ -448,7 +443,6 @@
             }
         }
 
-        // Deteksi Operator Telepon
         function detectOperator(number) {
             const cleanNum = number.replace(/\D/g, '');
             const badge = document.getElementById('operator-badge');
@@ -499,7 +493,6 @@
             }
         }
 
-        // Render Katalog Produk
         function renderProducts(items) {
             const grid = document.getElementById('product-grid');
             if(items.length === 0) {
@@ -542,7 +535,6 @@
             renderProducts(filtered);
         }
 
-        // Manajemen Keranjang
         function addToCart(productId) {
             const product = products.find(p => p.id === productId);
             const existing = cart.find(item => item.id === productId && !item.isPulsa);
@@ -650,7 +642,6 @@
             totalEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
         }
 
-        // Eksekusi Panggilan API iPaymu Sandbox
         async function executeiPaymuPayment() {
             const name = document.getElementById('checkout-name').value;
             const phone = document.getElementById('checkout-phone').value;
@@ -668,10 +659,9 @@
             const productNames = cart.map(i => i.name).join(', ');
 
             btnPay.disabled = true;
-            btnPay.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Menghubungkan iPaymu...</span>`;
+            btnPay.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Memproses Pembayaran...</span>`;
 
             try {
-                // Request pembayaran ke iPaymu Sandbox
                 const response = await fetch(`${IPAYMU_BASE_URL}/payment`, {
                     method: 'POST',
                     headers: {
@@ -696,23 +686,22 @@
                 const result = await response.json();
 
                 if(result && result.Status === 200 && result.Data && result.Data.Url) {
-                    // Redirect otomatis ke link iPaymu Sandbox
                     window.location.href = result.Data.Url;
                 } else {
-                    alert(`Tagihan Berhasil Dibuat!\n\nMetode: ${selectedChannel.toUpperCase()}\nNama: ${name}\nTotal: Rp ${totalPrice.toLocaleString('id-ID')}\nMerchant VA: ${IPAYMU_VA}`);
+                    alert(`Pesanan Berhasil Dibuat!\n\nMetode: ${selectedChannel.toUpperCase()}\nNama: ${name}\nTotal: Rp ${totalPrice.toLocaleString('id-ID')}`);
                     cart = [];
                     updateCartUI();
                     showView('shop');
                 }
             } catch (error) {
-                console.error("iPaymu Sandbox Info:", error);
-                alert(`Tagihan iPaymu atas nama ${name} berhasil didaftarkan!\nNominal: Rp ${totalPrice.toLocaleString('id-ID')}\nMetode: ${selectedChannel.toUpperCase()}\nNomor VA iPaymu: ${IPAYMU_VA}`);
+                console.error("Payment Info:", error);
+                alert(`Pesanan atas nama ${name} berhasil didaftarkan!\nNominal: Rp ${totalPrice.toLocaleString('id-ID')}\nMetode: ${selectedChannel.toUpperCase()}`);
                 cart = [];
                 updateCartUI();
                 showView('shop');
             } finally {
                 btnPay.disabled = false;
-                btnPay.innerHTML = `<span>Bayar Sekarang via iPaymu</span> <i class="fa-solid fa-arrow-right"></i>`;
+                btnPay.innerHTML = `<span>Bayar Sekarang</span> <i class="fa-solid fa-arrow-right"></i>`;
             }
         }
 
