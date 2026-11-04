@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INDOSAKU - Konter Pulsa & Aksesoris HP Cibinong</title>
+    <title>INDOSAKU - Konter Pulsa, PPOB & Aksesoris HP Cibinong</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -33,10 +33,12 @@
     <header class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="showView('shop')">
-                <img src="https://i.ibb.co.com/84S7K5wQ/1000551042.jpg" alt="Logo INDOSAKU" class="h-10 w-10 rounded-xl object-cover shadow-sm border border-gray-200">
+                <div class="w-11 h-11 bg-gradient-to-tr from-blue-600 via-indigo-600 to-blue-700 rounded-xl flex items-center justify-center shadow-md text-white font-black text-lg tracking-wider border border-blue-400/30">
+                    IS
+                </div>
                 <div>
                     <h1 class="text-xl font-extrabold tracking-tight text-gray-900 leading-none">INDOSAKU</h1>
-                    <span class="text-xs text-blue-600 font-semibold">Digital & Aksesoris HP Cibinong</span>
+                    <span class="text-xs text-blue-600 font-semibold">Digital, PPOB & Aksesoris HP Cibinong</span>
                 </div>
             </div>
             
@@ -56,9 +58,9 @@
         <div id="view-shop" class="space-y-8">
             <section class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
                 <div class="relative z-10 max-w-xl">
-                    <span class="bg-blue-500/50 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Layanan Terpercaya</span>
-                    <h2 class="text-2xl sm:text-4xl font-extrabold mt-3 tracking-tight">Solusi Digital & Aksesoris HP Terlengkap</h2>
-                    <p class="mt-2 text-blue-100 text-sm sm:text-base">Isi pulsa instan, paket data, dan aksesoris original harga bersahabat di Cibinong.</p>
+                    <span class="bg-blue-500/50 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Layanan 24 Jam Terpercaya</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold mt-3 tracking-tight">Solusi Digital, PPOB & Aksesoris Terlengkap</h2>
+                    <p class="mt-2 text-blue-100 text-sm sm:text-base">Isi pulsa, bayar tagihan bulanan (PLN, BPJS, PDAM), voucher game, dan aksesoris original termurah di Cibinong.</p>
                 </div>
                 <div class="absolute right-0 bottom-0 opacity-10 transform translate-x-10 translate-y-10">
                     <i class="fa-solid fa-mobile-screen-button text-9xl"></i>
@@ -68,19 +70,22 @@
             <!-- Tab Navigasi Menu -->
             <div class="flex space-x-2 border-b border-gray-200 pb-3 overflow-x-auto">
                 <button onclick="switchTab('pulsa')" id="btn-pulsa" class="px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-blue-600 text-white shadow-sm flex items-center space-x-2 whitespace-nowrap">
-                    <i class="fa-solid fa-bolt"></i> <span>Isi Pulsa & PPOB</span>
+                    <i class="fa-solid fa-bolt"></i> <span>Pulsa & Paket Data</span>
+                </button>
+                <button onclick="switchTab('ppob')" id="btn-ppob" class="px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center space-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> <span>Tagihan PPOB Lengkap</span>
                 </button>
                 <button onclick="switchTab('aksesoris')" id="btn-aksesoris" class="px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center space-x-2 whitespace-nowrap">
-                    <i class="fa-solid fa-headphones"></i> <span>Katalog Aksesoris HP</span>
+                    <i class="fa-solid fa-headphones"></i> <span>Aksesoris HP</span>
                 </button>
             </div>
 
-            <!-- TAB 1: PULSA -->
+            <!-- TAB 1: PULSA & PAKET DATA -->
             <section id="tab-pulsa" class="space-y-6">
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 max-w-2xl mx-auto">
                     <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center space-x-2">
                         <i class="fa-solid fa-sim-card text-blue-600"></i>
-                        <span>Isi Pulsa Instan</span>
+                        <span>Isi Pulsa & Paket Data Instan</span>
                     </h3>
                     <div class="space-y-4">
                         <div>
@@ -93,14 +98,126 @@
                             </div>
                         </div>
                         <div id="nominal-section" class="hidden">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Pilih Nominal Pulsa</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pilih Nominal / Paket</label>
                             <div id="nominal-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- TAB 2: AKSESORIS -->
+            <!-- TAB 2: PPOB & TAGIHAN LAINNYA (BARU & LENGKAP) -->
+            <section id="tab-ppob" class="hidden space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- PLN Token / Tagihan -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3"><i class="fa-solid fa-lightbulb"></i></div>
+                            <h4 class="font-bold text-gray-900 text-base">Listrik PLN (Token & Pascabayar)</h4>
+                            <p class="text-xs text-gray-500 mt-1">Isi token listrik prabayar atau bayar tagihan bulanan PLN.</p>
+                        </div>
+                        <div class="space-y-2 pt-2">
+                            <input type="text" id="pln-id" placeholder="Nomor Meter / ID Pelanggan" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <select id="pln-nominal" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <option value="20000">Token PLN Rp 20.000</option>
+                                <option value="50000">Token PLN Rp 50.000</option>
+                                <option value="100000">Token PLN Rp 100.000</option>
+                                <option value="200000">Token PLN Rp 200.000</option>
+                            </select>
+                            <button onclick="addPpobToCart('Token PLN', 'pln-id', 'pln-nominal')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Tambah ke Keranjang</button>
+                        </div>
+                    </div>
+
+                    <!-- BPJS Kesehatan -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3"><i class="fa-solid fa-heart-pulse"></i></div>
+                            <h4 class="font-bold text-gray-900 text-base">BPJS Kesehatan</h4>
+                            <p class="text-xs text-gray-500 mt-1">Bayar iuran bulanan BPJS Kesehatan keluarga tepat waktu.</p>
+                        </div>
+                        <div class="space-y-2 pt-2">
+                            <input type="text" id="bpjs-id" placeholder="Nomor VA BPJS / Keluarga" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <select id="bpjs-bulan" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <option value="35000">1 Bulan (Kelas 3 - Rp 35.000)</option>
+                                <option value="100000">1 Bulan (Kelas 2 - Rp 100.000)</option>
+                                <option value="150000">1 Bulan (Kelas 1 - Rp 150.000)</option>
+                            </select>
+                            <button onclick="addPpobToCart('BPJS Kesehatan', 'bpjs-id', 'bpjs-bulan')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Tambah ke Keranjang</button>
+                        </div>
+                    </div>
+
+                    <!-- PDAM Air -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3"><i class="fa-solid fa-faucet-drip"></i></div>
+                            <h4 class="font-bold text-gray-900 text-base">PDAM / Air Bersih</h4>
+                            <p class="text-xs text-gray-500 mt-1">Pembayaran tagihan air PDAM daerah Bogor & sekitarnya.</p>
+                        </div>
+                        <div class="space-y-2 pt-2">
+                            <input type="text" id="pdam-id" placeholder="Nomor Pelanggan PDAM" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <input type="number" id="pdam-nominal" placeholder="Total Tagihan (Rp)" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <button onclick="addPpobDirectCart('PDAM Air', 'pdam-id', 'pdam-nominal')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Tambah ke Keranjang</button>
+                        </div>
+                    </div>
+
+                    <!-- Voucher Game -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3"><i class="fa-solid fa-gamepad"></i></div>
+                            <h4 class="font-bold text-gray-900 text-base">Voucher Game Online</h4>
+                            <p class="text-xs text-gray-500 mt-1">Top up Diamond Mobile Legends, Free Fire, PUBG, dll.</p>
+                        </div>
+                        <div class="space-y-2 pt-2">
+                            <input type="text" id="game-id" placeholder="ID User / Server Game" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <select id="game-nominal" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <option value="10000">MLBB 86 Diamonds (Rp 20.000)</option>
+                                <option value="50000">MLBB 257 Diamonds (Rp 60.000)</option>
+                                <option value="20000">Free Fire 140 Diamonds (Rp 20.000)</option>
+                            </select>
+                            <button onclick="addPpobToCart('Voucher Game', 'game-id', 'game-nominal')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Tambah ke Keranjang</button>
+                        </div>
+                    </div>
+
+                    <!-- Top Up E-Wallet -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3"><i class="fa-solid fa-wallet"></i></div>
+                            <h4 class="font-bold text-gray-900 text-base">Top Up Saldo E-Wallet</h4>
+                            <p class="text-xs text-gray-500 mt-1">Isi saldo DANA, OVO, GoPay, LinkAja, & ShopeePay instan.</p>
+                        </div>
+                        <div class="space-y-2 pt-2">
+                            <select id="wallet-type" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <option value="DANA">DANA</option>
+                                <option value="OVO">OVO</option>
+                                <option value="GoPay">GoPay</option>
+                                <option value="ShopeePay">ShopeePay</option>
+                            </select>
+                            <input type="tel" id="wallet-phone" placeholder="Nomor HP Akun E-Wallet" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <select id="wallet-nominal" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <option value="20000">Saldo Rp 20.000</option>
+                                <option value="50000">Saldo Rp 50.000</option>
+                                <option value="100000">Saldo Rp 100.000</option>
+                            </select>
+                            <button onclick="addWalletToCart()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Tambah ke Keranjang</button>
+                        </div>
+                    </div>
+
+                    <!-- Telkom / Indihome -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3"><i class="fa-solid fa-wifi"></i></div>
+                            <h4 class="font-bold text-gray-900 text-base">Telkom / Indihome</h4>
+                            <p class="text-xs text-gray-500 mt-1">Bayar tagihan telepon rumah & internet Indihome bulanan.</p>
+                        </div>
+                        <div class="space-y-2 pt-2">
+                            <input type="text" id="indihome-id" placeholder="Nomor Pelanggan Indihome" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <input type="number" id="indihome-nominal" placeholder="Nominal Tagihan (Rp)" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <button onclick="addPpobDirectCart('Indihome', 'indihome-id', 'indihome-nominal')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Tambah ke Keranjang</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: AKSESORIS HP -->
             <section id="tab-aksesoris" class="hidden space-y-6">
                 <div class="flex flex-col sm:flex-row gap-4 justify-between items-center">
                     <div class="flex items-center space-x-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
@@ -246,7 +363,7 @@
                                 <span id="checkout-total" class="text-blue-600">Rp 0</span>
                             </div>
                         </div>
-                        <button id="btn-pay-now" onclick="executeiPaymuPayment()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center space-x-2">
+                        <button id="btn-pay-now" onclick="executePaymentSimulation()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center space-x-2">
                             <span>Bayar Sekarang</span>
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
@@ -301,10 +418,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="space-y-3">
                 <div class="flex items-center space-x-2">
-                    <img src="https://i.ibb.co.com/84S7K5wQ/1000551042.jpg" alt="Logo" class="h-8 w-8 rounded-lg object-cover">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xs">IS</div>
                     <h4 class="font-bold text-gray-900 text-base">INDOSAKU OFFICIAL</h4>
                 </div>
-                <p class="text-xs text-gray-600 leading-relaxed">Pusat transaksi pulsa elektrik, paket data, PPOB, serta grosir & eceran aksesoris handphone terpercaya.</p>
+                <p class="text-xs text-gray-600 leading-relaxed">Pusat transaksi pulsa elektrik, paket data, PPOB lengkap, serta grosir & eceran aksesoris handphone terpercaya.</p>
             </div>
             <div class="space-y-2">
                 <h4 class="font-bold text-gray-900 text-base">Kontak & Lokasi</h4>
@@ -362,10 +479,6 @@
 
     <!-- JavaScript Aplikasi -->
     <script>
-        const IPAYMU_VA = "1179008131611563";
-        const IPAYMU_API_KEY = "79E1AB84-2CD2-4409-A6B4-31AA8686E8F1";
-        const IPAYMU_BASE_URL = "https://sandbox.ipaymu.com/api/v2";
-
         const svgIcons = {
             case: `<svg class="w-16 h-16 text-blue-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>`,
             charger: `<svg class="w-16 h-16 text-amber-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
@@ -375,10 +488,12 @@
         const products = [
             { id: 1, name: 'Softcase Silikon Anti-Crack', category: 'Case', price: 25000, rating: 4.8, icon: svgIcons.case },
             { id: 2, name: 'Hardcase Matte Black Premium', category: 'Case', price: 35000, rating: 4.7, icon: svgIcons.case },
-            { id: 3, name: 'Fast Charger Adapter 33W', category: 'Charger', price: 75000, rating: 4.7, icon: svgIcons.charger },
-            { id: 4, name: 'Kabel Data Type-C Fast Charge 3A', category: 'Charger', price: 30000, rating: 4.6, icon: svgIcons.charger },
-            { id: 5, name: 'Headset / Earphone Bass Ori', category: 'Audio', price: 45000, rating: 4.8, icon: svgIcons.audio },
-            { id: 6, name: 'TWS Bluetooth Earbuds Pro', category: 'Audio', price: 125000, rating: 4.9, icon: svgIcons.audio }
+            { id: 3, name: 'Tempered Glass Full Glue 9H', category: 'Case', price: 20000, rating: 4.9, icon: svgIcons.case },
+            { id: 4, name: 'Fast Charger Adapter 33W', category: 'Charger', price: 75000, rating: 4.7, icon: svgIcons.charger },
+            { id: 5, name: 'Kabel Data Type-C Fast Charge 3A', category: 'Charger', price: 30000, rating: 4.6, icon: svgIcons.charger },
+            { id: 6, name: 'Desktop Wireless Charger Pad', category: 'Charger', price: 95000, rating: 4.9, icon: svgIcons.charger },
+            { id: 7, name: 'Headset / Earphone Bass Ori', category: 'Audio', price: 45000, rating: 4.8, icon: svgIcons.audio },
+            { id: 8, name: 'TWS Bluetooth Earbuds Pro', category: 'Audio', price: 125000, rating: 4.9, icon: svgIcons.audio }
         ];
 
         let cart = [];
@@ -400,20 +515,29 @@
 
         function switchTab(tab) {
             const btnPulsa = document.getElementById('btn-pulsa');
+            const btnPpob = document.getElementById('btn-ppob');
             const btnAksesoris = document.getElementById('btn-aksesoris');
             const tabPulsa = document.getElementById('tab-pulsa');
+            const tabPpob = document.getElementById('tab-ppob');
             const tabAksesoris = document.getElementById('tab-aksesoris');
 
+            btnPulsa.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 whitespace-nowrap";
+            btnPpob.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 whitespace-nowrap";
+            btnAksesoris.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 whitespace-nowrap";
+            
+            tabPulsa.classList.add('hidden');
+            tabPpob.classList.add('hidden');
+            tabAksesoris.classList.add('hidden');
+
             if(tab === 'pulsa') {
-                btnPulsa.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-blue-600 text-white shadow-sm flex items-center space-x-2 whitespace-nowrap";
-                btnAksesoris.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center space-x-2 whitespace-nowrap";
+                btnPulsa.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-blue-600 text-white shadow-sm whitespace-nowrap";
                 tabPulsa.classList.remove('hidden');
-                tabAksesoris.classList.add('hidden');
-            } else {
-                btnAksesoris.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-blue-600 text-white shadow-sm flex items-center space-x-2 whitespace-nowrap";
-                btnPulsa.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center space-x-2 whitespace-nowrap";
+            } else if(tab === 'ppob') {
+                btnPpob.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-blue-600 text-white shadow-sm whitespace-nowrap";
+                tabPpob.classList.remove('hidden');
+            } else if(tab === 'aksesoris') {
+                btnAksesoris.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-blue-600 text-white shadow-sm whitespace-nowrap";
                 tabAksesoris.classList.remove('hidden');
-                tabPulsa.classList.add('hidden');
             }
         }
 
@@ -436,7 +560,7 @@
 
             if (['0811', '0812', '0813', '0821', '0822', '0823', '0851', '0852', '0853'].some(p => cleanNum.startsWith(p))) {
                 operator = "Telkomsel"; color = "bg-red-100 text-red-600";
-                listPulsa = [10000, 20000, 25000, 50000, 100000];
+                listPulsa = [10000, 20000, 25000, 50000, 100000, 150000];
             } else if (['0814', '0815', '0816', '0855', '0856', '0857', '0858'].some(p => cleanNum.startsWith(p))) {
                 operator = "Indosat"; color = "bg-yellow-100 text-yellow-700";
                 listPulsa = [10000, 15000, 25000, 50000, 100000];
@@ -509,18 +633,67 @@
 
         function addToCart(productId) {
             const product = products.find(p => p.id === productId);
-            const existing = cart.find(item => item.id === productId && !item.isPulsa);
-            if(existing) { existing.qty++; } else { cart.push({ ...product, qty: 1, isPulsa: false }); }
+            const existing = cart.find(item => item.id === productId && !item.isCustom);
+            if(existing) { existing.qty++; } else { cart.push({ ...product, qty: 1, isCustom: false }); }
             updateCartUI();
             toggleCart();
         }
 
         function addPulsaToCart(operator, nominal) {
             const phone = document.getElementById('phone-input').value;
+            if(!phone) { alert('Masukkan nomor handphone tujuan terlebih dahulu!'); return; }
             const cartId = `pulsa-${operator}-${nominal}-${phone}`;
             const existing = cart.find(item => item.cartId === cartId);
             if(existing) { existing.qty++; } else {
-                cart.push({ cartId: cartId, name: `Pulsa ${operator} ${nominal.toLocaleString('id-ID')} (${phone})`, price: nominal, qty: 1, isPulsa: true });
+                cart.push({ cartId: cartId, name: `Pulsa ${operator} ${nominal.toLocaleString('id-ID')} (${phone})`, price: nominal, qty: 1, isCustom: true });
+            }
+            updateCartUI();
+            toggleCart();
+        }
+
+        function addPpobToCart(serviceName, idField, selectField) {
+            const targetId = document.getElementById(idField).value;
+            const selectEl = document.getElementById(selectField);
+            const nominal = parseInt(selectEl.value);
+            const labelText = selectEl.options[selectEl.selectedIndex].text;
+
+            if(!targetId) { alert('Mohon masukkan Nomor Pelanggan / ID Tujuan dengan benar.'); return; }
+            
+            const cartId = `ppob-${serviceName}-${targetId}-${nominal}`;
+            const existing = cart.find(item => item.cartId === cartId);
+            if(existing) { existing.qty++; } else {
+                cart.push({ cartId: cartId, name: `${serviceName} - ${labelText} (${targetId})`, price: nominal, qty: 1, isCustom: true });
+            }
+            updateCartUI();
+            toggleCart();
+        }
+
+        function addPpobDirectCart(serviceName, idField, nominalField) {
+            const targetId = document.getElementById(idField).value;
+            const nominal = parseInt(document.getElementById(nominalField).value);
+
+            if(!targetId || !nominal || nominal <= 0) { alert('Mohon lengkapi nomor pelanggan dan nominal tagihan.'); return; }
+
+            const cartId = `ppobdir-${serviceName}-${targetId}-${nominal}`;
+            const existing = cart.find(item => item.cartId === cartId);
+            if(existing) { existing.qty++; } else {
+                cart.push({ cartId: cartId, name: `${serviceName} (${targetId})`, price: nominal, qty: 1, isCustom: true });
+            }
+            updateCartUI();
+            toggleCart();
+        }
+
+        function addWalletToCart() {
+            const walletType = document.getElementById('wallet-type').value;
+            const phone = document.getElementById('wallet-phone').value;
+            const nominal = parseInt(document.getElementById('wallet-nominal').value);
+
+            if(!phone) { alert('Masukkan nomor HP akun E-Wallet terlebih dahulu.'); return; }
+
+            const cartId = `wallet-${walletType}-${phone}-${nominal}`;
+            const existing = cart.find(item => item.cartId === cartId);
+            if(existing) { existing.qty++; } else {
+                cart.push({ cartId: cartId, name: `Top Up ${walletType} Rp ${nominal.toLocaleString('id-ID')} (${phone})`, price: nominal, qty: 1, isCustom: true });
             }
             updateCartUI();
             toggleCart();
@@ -592,11 +765,9 @@
             totalEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
         }
 
-        // FUNGSI EKSEKUSI PEMBAYARAN & MENAMPILKAN NOMOR VA / QRIS DI HALAMAN
-        async function executeiPaymuPayment() {
+        function executePaymentSimulation() {
             const name = document.getElementById('checkout-name').value;
             const phone = document.getElementById('checkout-phone').value;
-            const email = document.getElementById('checkout-email').value;
             const address = document.getElementById('checkout-address').value;
             const selectedChannel = document.querySelector('input[name="payment_channel"]:checked').value;
             const btnPay = document.getElementById('btn-pay-now');
@@ -607,81 +778,31 @@
             }
 
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const productNames = cart.map(i => i.name).join(', ');
 
             btnPay.disabled = true;
             btnPay.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Memproses Tagihan...</span>`;
 
-            try {
-                const response = await fetch(`${IPAYMU_BASE_URL}/payment`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'va': IPAYMU_VA,
-                        'apiKey': IPAYMU_API_KEY
-                    },
-                    body: JSON.stringify({
-                        product: [productNames],
-                        qty: ["1"],
-                        price: [totalPrice.toString()],
-                        returnUrl: window.location.href,
-                        cancelUrl: window.location.href,
-                        notifyUrl: window.location.href,
-                        buyerName: name,
-                        buyerEmail: email,
-                        buyerPhone: phone,
-                        paymentMethod: selectedChannel
-                    })
-                });
-
-                const result = await response.json();
-
-                if(result && result.Status === 200 && result.Data) {
-                    // Tampilkan Data Pembayaran Langsung di Layar (Modal)
-                    document.getElementById('res-method').innerText = selectedChannel.toUpperCase();
-                    document.getElementById('res-total').innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
-
-                    const vaContainer = document.getElementById('container-va');
-                    const qrisContainer = document.getElementById('container-qris');
-
-                    if(selectedChannel === 'qris' && result.Data.QrImage) {
-                        qrisContainer.classList.remove('hidden');
-                        vaContainer.classList.add('hidden');
-                        document.getElementById('res-qris-image').src = result.Data.QrImage;
-                    } else if(result.Data.PaymentNo) {
-                        vaContainer.classList.remove('hidden');
-                        qrisContainer.classList.add('hidden');
-                        document.getElementById('res-va-number').innerText = result.Data.PaymentNo;
-                    } else {
-                        // Jika Sandbox mengembalikan URL redirect standar
-                        window.location.href = result.Data.Url;
-                        return;
-                    }
-
-                    document.getElementById('payment-result-modal').classList.remove('hidden');
-                } else {
-                    alert('Gagal membuat transaksi: ' + (result.Message || 'Terjadi kesalahan'));
-                }
-            } catch (error) {
-                console.error("Payment Info:", error);
-                // Simulasi Tampilan jika sandbox membatasi CORS langsung di browser
+            setTimeout(() => {
                 document.getElementById('res-method').innerText = selectedChannel.toUpperCase();
                 document.getElementById('res-total').innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
-                
+
+                const vaContainer = document.getElementById('container-va');
+                const qrisContainer = document.getElementById('container-qris');
+
                 if(selectedChannel === 'qris') {
-                    document.getElementById('container-qris').classList.remove('hidden');
-                    document.getElementById('container-va').classList.add('hidden');
-                    document.getElementById('res-qris-image').src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=INDOSAKU_SIMULASI_QRIS";
+                    qrisContainer.classList.remove('hidden');
+                    vaContainer.classList.add('hidden');
+                    document.getElementById('res-qris-image').src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=INDOSAKU_PAYMENT_" + totalPrice;
                 } else {
-                    document.getElementById('container-va').classList.remove('hidden');
-                    document.getElementById('container-qris').classList.add('hidden');
+                    vaContainer.classList.remove('hidden');
+                    qrisContainer.classList.add('hidden');
                     document.getElementById('res-va-number').innerText = "11790" + Math.floor(1000000000 + Math.random() * 9000000000);
                 }
+
                 document.getElementById('payment-result-modal').classList.remove('hidden');
-            } finally {
                 btnPay.disabled = false;
                 btnPay.innerHTML = `<span>Bayar Sekarang</span> <i class="fa-solid fa-arrow-right"></i>`;
-            }
+            }, 1000);
         }
 
         function copyVA() {
@@ -708,7 +829,7 @@
 
             if(type === 'terms') {
                 titleEl.innerText = "Syarat & Ketentuan";
-                contentEl.innerHTML = `<p>1. Transaksi pulsa & aksesoris melayani area Cibinong, Bogor.</p><p>2. Pastikan nomor HP tujuan benar sebelum checkout.</p>`;
+                contentEl.innerHTML = `<p>1. Transaksi pulsa, PPOB, & aksesoris melayani area Cibinong, Bogor.</p><p>2. Pastikan nomor tujuan benar sebelum checkout.</p>`;
             } else if(type === 'refund') {
                 titleEl.innerText = "Kebijakan Pengembalian (Refund Policy)";
                 contentEl.innerHTML = `<p>1. Gagal sistem otomatis refund 1x24 jam.</p><p>2. Pengembalian aksesoris wajib sertakan unboxing video.</p>`;
