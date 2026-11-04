@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INDOSAKU - Checkout & Pembayaran</title>
+    <title>INDOSAKU - Konter Pulsa, Aksesoris HP & Checkout</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -13,28 +13,17 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                        }
+                        brand: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8' }
                     }
                 }
             }
         }
     </script>
     <style>
-        [v-cloak] { display: none; }
         .va-option input[type="radio"]:checked + label {
-            border-color: #3b82f6;
+            border-color: #2563eb;
             background-color: #eff6ff;
+            box-shadow: 0 0 0 2px #2563eb;
         }
     </style>
 </head>
@@ -43,303 +32,711 @@
     <!-- Header / Navbar -->
     <header class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <!-- Logo Baru -->
-                <img src="https://i.ibb.co/pLp1yD4/logo-indosaku-baru.png" alt="INDOSAKU Logo" class="h-10 w-auto">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showView('shop')">
+                <!-- Logo Vektor INDOSAKU (Tampil 100% Tanpa URL Luar) -->
+                <div class="bg-gradient-to-tr from-blue-700 to-indigo-500 text-white p-2 rounded-xl flex items-center justify-center w-11 h-11 shadow-md font-black text-xl tracking-tighter">
+                    IS
+                </div>
                 <div>
-                    <h1 class="text-xl font-bold tracking-tight text-gray-900 leading-none">INDOSAKU</h1>
-                    <span class="text-xs text-brand-600 font-medium">Checkout & Pembayaran</span>
+                    <h1 class="text-xl font-extrabold tracking-tight text-gray-900 leading-none">INDOSAKU</h1>
+                    <span class="text-xs text-blue-600 font-semibold">Digital & Aksesoris HP Cibinong</span>
                 </div>
             </div>
-            <a href="index.html" class="text-sm text-gray-600 hover:text-brand-600 flex items-center space-x-1">
-                <i class="fa-solid fa-arrow-left"></i>
-                <span>Kembali ke Toko</span>
-            </a>
+            
+            <div class="flex items-center space-x-4">
+                <button onclick="toggleCart()" class="relative bg-gray-100 hover:bg-gray-200 p-2.5 rounded-full transition flex items-center justify-center">
+                    <i class="fa-solid fa-cart-shopping text-gray-700"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold hidden">0</span>
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            <!-- Formulir Checkout & Pilihan Pembayaran -->
-            <div class="md:col-span-2 space-y-8">
-                <section class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                        <i class="fa-solid fa-user text-brand-600"></i>
-                        <span>Informasi Pelanggan</span>
-                    </h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-                            <input type="text" id="name" placeholder="Masukkan nama lengkap" class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none text-gray-900">
-                        </div>
-                        <div>
-                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Nomor WhatsApp</label>
-                            <input type="tel" id="phone" placeholder="Contoh: 081234567890" class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none text-gray-900">
-                        </div>
-                        <div class="sm:col-span-2">
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                            <input type="email" id="email" placeholder="Masukkan alamat email" class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none text-gray-900">
-                        </div>
-                    </div>
-                </section>
+    <!-- MAIN CONTAINER -->
+    <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
 
-                <section class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                        <i class="fa-solid fa-credit-card text-brand-600"></i>
-                        <span>Pilih Metode Pembayaran</span>
-                    </h2>
-                    
-                    <div class="space-y-4">
-                        <!-- Pilihan QRIS -->
-                        <div class="va-option">
-                            <input type="radio" id="qris" name="payment_method" value="qris" class="hidden" checked>
-                            <label for="qris" class="block p-4 bg-white border border-gray-200 rounded-xl cursor-pointer hover:border-brand-300 transition">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <img src="https://ipaymu.com/wp-content/uploads/2021/08/qris-logo.png" alt="QRIS" class="h-8 w-auto">
-                                        <span class="font-semibold text-gray-900">QRIS</span>
-                                    </div>
-                                    <span class="text-xs text-gray-500">Otomatis Terverifikasi</span>
-                                </div>
-                            </label>
-                        </div>
+        <!-- ================= PAGE 1: KATALOG UTAMA ================= -->
+        <div id="view-shop" class="space-y-8">
 
-                        <!-- Pilihan Virtual Account (VA) -->
-                        <div>
-                            <h3 class="text-sm font-semibold text-gray-700 mb-2">Virtual Account (Transfer Bank)</h3>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                                <!-- VA Mandiri -->
-                                <div class="va-option">
-                                    <input type="radio" id="va_mandiri" name="payment_method" value="va_mandiri" class="hidden">
-                                    <label for="va_mandiri" class="block p-3 bg-white border border-gray-200 rounded-xl cursor-pointer hover:border-brand-300 transition text-center space-y-1">
-                                        <img src="https://ipaymu.com/wp-content/uploads/2021/08/mandiri-logo.png" alt="Mandiri" class="h-6 w-auto mx-auto">
-                                        <span class="block text-xs font-medium text-gray-900">Mandiri VA</span>
-                                    </label>
-                                </div>
-                                <!-- VA BNI -->
-                                <div class="va-option">
-                                    <input type="radio" id="va_bni" name="payment_method" value="va_bni" class="hidden">
-                                    <label for="va_bni" class="block p-3 bg-white border border-gray-200 rounded-xl cursor-pointer hover:border-brand-300 transition text-center space-y-1">
-                                        <img src="https://ipaymu.com/wp-content/uploads/2021/08/bni-logo.png" alt="BNI" class="h-6 w-auto mx-auto">
-                                        <span class="block text-xs font-medium text-gray-900">BNI VA</span>
-                                    </label>
-                                </div>
-                                <!-- VA BRI -->
-                                <div class="va-option">
-                                    <input type="radio" id="va_bri" name="payment_method" value="va_bri" class="hidden">
-                                    <label for="va_bri" class="block p-3 bg-white border border-gray-200 rounded-xl cursor-pointer hover:border-brand-300 transition text-center space-y-1">
-                                        <img src="https://ipaymu.com/wp-content/uploads/2021/08/bri-logo.png" alt="BRI" class="h-6 w-auto mx-auto">
-                                        <span class="block text-xs font-medium text-gray-900">BRI VA</span>
-                                    </label>
-                                </div>
-                                <!-- VA CIMB Niaga -->
-                                <div class="va-option">
-                                    <input type="radio" id="va_cimb" name="payment_method" value="va_cimb" class="hidden">
-                                    <label for="va_cimb" class="block p-3 bg-white border border-gray-200 rounded-xl cursor-pointer hover:border-brand-300 transition text-center space-y-1">
-                                        <img src="https://ipaymu.com/wp-content/uploads/2021/08/cimb-logo.png" alt="CIMB Niaga" class="h-6 w-auto mx-auto">
-                                        <span class="block text-xs font-medium text-gray-900">CIMB VA</span>
-                                    </label>
-                                </div>
-                                <!-- VA Permata -->
-                                <div class="va-option">
-                                    <input type="radio" id="va_permata" name="payment_method" value="va_permata" class="hidden">
-                                    <label for="va_permata" class="block p-3 bg-white border border-gray-200 rounded-xl cursor-pointer hover:border-brand-300 transition text-center space-y-1">
-                                        <img src="https://ipaymu.com/wp-content/uploads/2021/08/permata-logo.png" alt="Permata" class="h-6 w-auto mx-auto">
-                                        <span class="block text-xs font-medium text-gray-900">Permata VA</span>
-                                    </label>
-                                </div>
-                                <!-- VA Artha Graha -->
-                                <div class="va-option">
-                                    <input type="radio" id="va_ag" name="payment_method" value="va_ag" class="hidden">
-                                    <label for="va_ag" class="block p-3 bg-white border border-gray-200 rounded-xl cursor-pointer hover:border-brand-300 transition text-center space-y-1">
-                                        <img src="https://ipaymu.com/wp-content/uploads/2021/08/ag-logo.png" alt="Artha Graha" class="h-6 w-auto mx-auto">
-                                        <span class="block text-xs font-medium text-gray-900">Artha Graha VA</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Banner / Hero Section -->
+            <section class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
+                <div class="relative z-10 max-w-xl">
+                    <span class="bg-blue-500/50 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Layanan Terpercaya</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold mt-3 tracking-tight">Solusi Digital & Aksesoris HP Terlengkap</h2>
+                    <p class="mt-2 text-blue-100 text-sm sm:text-base">Isi pulsa instan, paket data, dan aksesoris original harga bersahabat di Cibinong.</p>
+                </div>
+                <div class="absolute right-0 bottom-0 opacity-10 transform translate-x-10 translate-y-10">
+                    <i class="fa-solid fa-mobile-screen-button text-9xl"></i>
+                </div>
+            </section>
 
-                        <!-- Pilihan Convenience Store -->
-                        <div>
-                            <h3 class="text-sm font-semibold text-gray-700 mb-2">Gerai Ritel</h3>
-                            <div class="grid grid-cols-2 gap-3">
-                                <!-- Alfamart -->
-                                <div class="va-option">
-                                    <input type="radio" id="alfamart" name="payment_method" value="alfamart" class="hidden">
-                                    <label for="alfamart" class="block p-3 bg-white border border-gray-200 rounded-xl cursor-pointer hover:border-brand-300 transition text-center space-y-1">
-                                        <img src="https://ipaymu.com/wp-content/uploads/2021/08/alfamart-logo.png" alt="Alfamart" class="h-6 w-auto mx-auto">
-                                        <span class="block text-xs font-medium text-gray-900">Alfamart</span>
-                                    </label>
-                                </div>
-                                <!-- Indomaret -->
-                                <div class="va-option">
-                                    <input type="radio" id="indomaret" name="payment_method" value="indomaret" class="hidden">
-                                    <label for="indomaret" class="block p-3 bg-white border border-gray-200 rounded-xl cursor-pointer hover:border-brand-300 transition text-center space-y-1">
-                                        <img src="https://ipaymu.com/wp-content/uploads/2021/08/indomaret-logo.png" alt="Indomaret" class="h-6 w-auto mx-auto">
-                                        <span class="block text-xs font-medium text-gray-900">Indomaret</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+            <!-- Tab Navigasi Menu -->
+            <div class="flex space-x-2 border-b border-gray-200 pb-3 overflow-x-auto">
+                <button onclick="switchTab('pulsa')" id="btn-pulsa" class="px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-blue-600 text-white shadow-sm flex items-center space-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-bolt"></i> <span>Isi Pulsa & PPOB</span>
+                </button>
+                <button onclick="switchTab('aksesoris')" id="btn-aksesoris" class="px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center space-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-headphones"></i> <span>Katalog Aksesoris HP</span>
+                </button>
             </div>
 
-            <!-- Ringkasan Pesanan -->
-            <div class="space-y-6">
-                <section class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 sticky top-24">
-                    <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                        <i class="fa-solid fa-shopping-bag text-brand-600"></i>
-                        <span>Ringkasan Pesanan</span>
-                    </h2>
+            <!-- TAB 1: PULSA & PPOB -->
+            <section id="tab-pulsa" class="space-y-6">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 max-w-2xl mx-auto">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center space-x-2">
+                        <i class="fa-solid fa-sim-card text-blue-600"></i>
+                        <span>Isi Pulsa Instan</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Nomor Handphone</label>
+                            <div class="relative">
+                                <input type="tel" id="phone-input" oninput="detectOperator(this.value)" placeholder="Contoh: 08131611563" maxlength="14" class="w-full pl-4 pr-28 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none font-semibold text-gray-900">
+                                <div id="operator-badge" class="absolute right-3 top-2.5 text-xs font-bold px-2.5 py-1.5 rounded-lg bg-gray-200 text-gray-600 uppercase">
+                                    Operator
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pilihan Nominal -->
+                        <div id="nominal-section" class="hidden">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pilih Nominal Pulsa</label>
+                            <div id="nominal-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <!-- Dinamis via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: AKSESORIS HP -->
+            <section id="tab-aksesoris" class="hidden space-y-6">
+                <!-- Filter Kategori & Pencarian -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-between items-center">
+                    <div class="flex items-center space-x-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
+                        <button onclick="filterCategory('all')" id="cat-all" class="px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white whitespace-nowrap">Semua</button>
+                        <button onclick="filterCategory('Case')" id="cat-case" class="px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-600 border border-gray-200 hover:bg-gray-100 whitespace-nowrap">Case HP</button>
+                        <button onclick="filterCategory('Charger')" id="cat-charger" class="px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-600 border border-gray-200 hover:bg-gray-100 whitespace-nowrap">Charger & Kabel</button>
+                        <button onclick="filterCategory('Audio')" id="cat-audio" class="px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-600 border border-gray-200 hover:bg-gray-100 whitespace-nowrap">Audio</button>
+                    </div>
+                    <div class="w-full sm:w-72">
+                        <input type="text" id="search-input" oninput="searchProducts(this.value)" placeholder="Cari aksesoris..." class="w-full px-4 py-2 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <!-- Grid Produk Aksesoris -->
+                <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                    <!-- Dinamis via JS -->
+                </div>
+            </section>
+
+        </div>
+
+
+        <!-- ================= PAGE 2: HALAMAN CHECKOUT & PILIHAN VA ================= -->
+        <div id="view-checkout" class="hidden space-y-6">
+            <div class="flex items-center justify-between border-b border-gray-200 pb-4">
+                <button onclick="showView('shop')" class="text-sm font-bold text-blue-600 hover:underline flex items-center space-x-2">
+                    <i class="fa-solid fa-arrow-left"></i> <span>Kembali ke Katalog Belanja</span>
+                </button>
+                <h2 class="text-lg font-bold text-gray-900">Halaman Checkout & Pembayaran</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Formulir Data Pelanggan & Metode Pembayaran VA Langsung -->
+                <div class="lg:col-span-2 space-y-6">
                     
-                    <div id="order_items" class="space-y-3 mb-4 border-b border-gray-100 pb-4">
-                        <!-- Dinamis via JS -->
+                    <!-- Form Pelanggan & Alamat -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
+                        <h3 class="text-md font-bold text-gray-900 flex items-center space-x-2 border-b pb-3">
+                            <i class="fa-solid fa-address-card text-blue-600"></i>
+                            <span>1. Data Pemesan & Alamat Pengiriman</span>
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-700 mb-1">Nama Lengkap</label>
+                                <input type="text" id="checkout-name" placeholder="Masukkan nama pemesan" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-700 mb-1">Nomor WhatsApp/Telepon</label>
+                                <input type="tel" id="checkout-phone" value="08131611563" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block text-xs font-semibold text-gray-700 mb-1">Email Pemesan</label>
+                                <input type="email" id="checkout-email" value="aangpratama187@gmail.com" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block text-xs font-semibold text-gray-700 mb-1">Alamat Lengkap Usaha / Tujuan Pengiriman</label>
+                                <textarea id="checkout-address" rows="2" placeholder="Contoh: Jl. Mayor Oking No. 12, Cibinong, Kabupaten Bogor, Jawa Barat" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">Cibinong, Bogor, Jawa Barat</textarea>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="space-y-2 mb-6">
-                        <div class="flex justify-between text-sm text-gray-600">
-                            <span>Subtotal</span>
-                            <span id="subtotal">Rp 0</span>
+                    <!-- Pilihan Pembayaran iPaymu (Tampil Langsung) -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 space-y-4">
+                        <h3 class="text-md font-bold text-gray-900 flex items-center space-x-2 border-b pb-3">
+                            <i class="fa-solid fa-wallet text-blue-600"></i>
+                            <span>2. Pilih Metode Pembayaran (iPaymu Live / Sandbox)</span>
+                        </h3>
+
+                        <!-- OPSI QRIS -->
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-gray-500 uppercase">Instan / QR Code</label>
+                            <div class="va-option">
+                                <input type="radio" id="pay-qris" name="payment_channel" value="qris" class="hidden" checked>
+                                <label for="pay-qris" class="flex items-center justify-between p-3.5 border rounded-xl cursor-pointer hover:bg-blue-50/50 transition">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-10 h-10 bg-red-50 text-red-600 rounded-lg flex items-center justify-center font-black text-xs border border-red-200">QRIS</div>
+                                        <div>
+                                            <p class="font-bold text-sm text-gray-900">QRIS Instant</p>
+                                            <p class="text-xs text-gray-500">BCA, Mandiri, GoPay, OVO, DANA, ShopeePay, dll</p>
+                                        </div>
+                                    </div>
+                                    <i class="fa-solid fa-qrcode text-gray-400 text-lg"></i>
+                                </label>
+                            </div>
                         </div>
-                        <div class="flex justify-between text-sm text-gray-600">
-                            <span>Biaya Layanan</span>
-                            <span>Rp 0</span>
+
+                        <!-- OPSI VIRTUAL ACCOUNT (LANGSUNG DITAMPILKAN) -->
+                        <div class="space-y-2 pt-2">
+                            <label class="block text-xs font-bold text-gray-500 uppercase">Virtual Account (Transfer Bank)</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                
+                                <div class="va-option">
+                                    <input type="radio" id="va-bca" name="payment_channel" value="bca" class="hidden">
+                                    <label for="va-bca" class="flex flex-col items-center p-3 border rounded-xl cursor-pointer text-center hover:bg-blue-50/50 transition">
+                                        <span class="font-black text-blue-800 text-sm">BCA</span>
+                                        <span class="text-[10px] text-gray-500">BCA Virtual Account</span>
+                                    </label>
+                                </div>
+
+                                <div class="va-option">
+                                    <input type="radio" id="va-mandiri" name="payment_channel" value="mandiri" class="hidden">
+                                    <label for="va-mandiri" class="flex flex-col items-center p-3 border rounded-xl cursor-pointer text-center hover:bg-blue-50/50 transition">
+                                        <span class="font-black text-yellow-600 text-sm">MANDIRI</span>
+                                        <span class="text-[10px] text-gray-500">Mandiri Living VA</span>
+                                    </label>
+                                </div>
+
+                                <div class="va-option">
+                                    <input type="radio" id="va-bri" name="payment_channel" value="bri" class="hidden">
+                                    <label for="va-bri" class="flex flex-col items-center p-3 border rounded-xl cursor-pointer text-center hover:bg-blue-50/50 transition">
+                                        <span class="font-black text-blue-600 text-sm">BRI</span>
+                                        <span class="text-[10px] text-gray-500">BRIVA</span>
+                                    </label>
+                                </div>
+
+                                <div class="va-option">
+                                    <input type="radio" id="va-bni" name="payment_channel" value="bni" class="hidden">
+                                    <label for="va-bni" class="flex flex-col items-center p-3 border rounded-xl cursor-pointer text-center hover:bg-blue-50/50 transition">
+                                        <span class="font-black text-orange-600 text-sm">BNI</span>
+                                        <span class="text-[10px] text-gray-500">BNI Virtual Account</span>
+                                    </label>
+                                </div>
+
+                                <div class="va-option">
+                                    <input type="radio" id="va-cimb" name="payment_channel" value="cimb" class="hidden">
+                                    <label for="va-cimb" class="flex flex-col items-center p-3 border rounded-xl cursor-pointer text-center hover:bg-blue-50/50 transition">
+                                        <span class="font-black text-red-700 text-sm">CIMB</span>
+                                        <span class="text-[10px] text-gray-500">CIMB Niaga VA</span>
+                                    </label>
+                                </div>
+
+                                <div class="va-option">
+                                    <input type="radio" id="va-bsi" name="payment_channel" value="bsi" class="hidden">
+                                    <label for="va-bsi" class="flex flex-col items-center p-3 border rounded-xl cursor-pointer text-center hover:bg-blue-50/50 transition">
+                                        <span class="font-black text-teal-600 text-sm">BSI</span>
+                                        <span class="text-[10px] text-gray-500">BSI Syariah VA</span>
+                                    </label>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="flex justify-between text-base font-bold text-gray-900 pt-2 border-t border-gray-100">
-                            <span>Total Pembayaran</span>
-                            <span id="total_price" class="text-brand-600">Rp 0</span>
+
+                        <!-- OPSI GERAI RITEL -->
+                        <div class="space-y-2 pt-2">
+                            <label class="block text-xs font-bold text-gray-500 uppercase">Gerai Ritel (Convenience Store)</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="va-option">
+                                    <input type="radio" id="ret-alfamart" name="payment_channel" value="alfamart" class="hidden">
+                                    <label for="ret-alfamart" class="flex flex-col items-center p-3 border rounded-xl cursor-pointer text-center hover:bg-blue-50/50 transition">
+                                        <span class="font-black text-red-600 text-sm">ALFAMART</span>
+                                        <span class="text-[10px] text-gray-500">Bayar di Kasir Alfamart</span>
+                                    </label>
+                                </div>
+                                <div class="va-option">
+                                    <input type="radio" id="ret-indomaret" name="payment_channel" value="indomaret" class="hidden">
+                                    <label for="ret-indomaret" class="flex flex-col items-center p-3 border rounded-xl cursor-pointer text-center hover:bg-blue-50/50 transition">
+                                        <span class="font-black text-blue-700 text-sm">INDOMARET</span>
+                                        <span class="text-[10px] text-gray-500">Bayar di Kasir Indomaret</span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
 
-                    <button onclick="processPayment()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-xl transition shadow-md flex items-center justify-center space-x-2">
-                        <span>Bayar Sekarang</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                    <p class="text-center text-xs text-gray-500 mt-4">
-                        <i class="fa-solid fa-lock text-green-500"></i>
-                        Pembayaran Aman & Terenkripsi oleh iPaymu
-                    </p>
-                </section>
+                </div>
+
+                <!-- Rincian Total Pesanan & Tombol Eksekusi iPaymu -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 sticky top-24 space-y-4">
+                        <h3 class="text-md font-bold text-gray-900 border-b pb-3">Ringkasan Pesanan</h3>
+                        
+                        <div id="checkout-items-list" class="space-y-3 max-h-60 overflow-y-auto">
+                            <!-- Dinamis via JS -->
+                        </div>
+
+                        <div class="border-t border-gray-100 pt-3 space-y-2 text-sm">
+                            <div class="flex justify-between text-gray-600">
+                                <span>Subtotal:</span>
+                                <span id="checkout-subtotal">Rp 0</span>
+                            </div>
+                            <div class="flex justify-between text-gray-600">
+                                <span>Biaya Layanan:</span>
+                                <span class="text-green-600 font-semibold">Gratis</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-base text-gray-900 border-t pt-2">
+                                <span>Total Pembayaran:</span>
+                                <span id="checkout-total" class="text-blue-600">Rp 0</span>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-blue-50 rounded-xl border border-blue-100 text-[11px] text-blue-700 space-y-1">
+                            <p><strong>Merchant VA:</strong> 1179008131611563</p>
+                            <p><strong>Base Endpoint:</strong> https://sandbox.ipaymu.com/api/v2</p>
+                        </div>
+
+                        <button id="btn-pay-now" onclick="executeiPaymuPayment()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition shadow-md flex items-center justify-center space-x-2">
+                            <span>Bayar Sekarang via iPaymu</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
+
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-100 mt-12 py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
-            &copy; 2024 INDOSAKU. Semua Hak Dilindungi.
+    <!-- Footer Kontak & Bantuan -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="space-y-3">
+                <h4 class="font-bold text-gray-900 text-base">INDOSAKU OFFICIAL</h4>
+                <p class="text-xs text-gray-600 leading-relaxed">Pusat transaksi pulsa elektrik, paket data, PPOB, serta grosir & eceran aksesoris handphone terpercaya.</p>
+            </div>
+            <div class="space-y-2">
+                <h4 class="font-bold text-gray-900 text-base">Kontak & Lokasi</h4>
+                <p class="text-xs text-gray-600 flex items-center space-x-2"><i class="fa-solid fa-location-dot text-blue-600 w-4"></i> <span>Alamat: Cibinong, Bogor, Jawa Barat</span></p>
+                <p class="text-xs text-gray-600 flex items-center space-x-2"><i class="fa-solid fa-phone text-blue-600 w-4"></i> <span>Telepon / WA: 08131611563</span></p>
+                <p class="text-xs text-gray-600 flex items-center space-x-2"><i class="fa-solid fa-envelope text-blue-600 w-4"></i> <span>Email: aangpratama187@gmail.com</span></p>
+            </div>
+            <div class="space-y-2">
+                <h4 class="font-bold text-gray-900 text-base">Informasi Legalitas</h4>
+                <div class="flex flex-col space-y-1 text-xs">
+                    <button onclick="openInfoModal('terms')" class="text-left text-blue-600 hover:underline">Syarat & Ketentuan</button>
+                    <button onclick="openInfoModal('refund')" class="text-left text-blue-600 hover:underline">Kebijakan Pengembalian (Refund Policy)</button>
+                    <button onclick="openInfoModal('faq')" class="text-left text-blue-600 hover:underline">FAQ (Pertanyaan Umum)</button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 pt-6 border-t border-gray-100 text-center text-xs text-gray-400">
+            &copy; 2026 INDOSAKU Cibinong. All rights reserved.
         </div>
     </footer>
 
+    <!-- Drawer Keranjang Belanja -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex justify-end">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col transform transition-transform duration-300">
+            <div class="p-4 border-b border-gray-100 flex items-center justify-between">
+                <h3 class="font-bold text-lg text-gray-900 flex items-center space-x-2">
+                    <i class="fa-solid fa-cart-shopping text-blue-600"></i>
+                    <span>Keranjang Pesanan</span>
+                </h3>
+                <button onclick="toggleCart()" class="text-gray-400 hover:text-gray-600 p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            
+            <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <!-- Dinamis item keranjang -->
+            </div>
+
+            <div class="p-4 border-t border-gray-100 bg-gray-50 space-y-3">
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-600">Total Pembayaran:</span>
+                    <span id="cart-total" class="font-bold text-lg text-blue-600">Rp 0</span>
+                </div>
+                <button onclick="goToCheckout()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-md">
+                    Lanjut ke Halaman Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Informasi (Terms, Refund, FAQ) -->
+    <div id="info-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b pb-3 sticky top-0 bg-white">
+                <h3 id="info-title" class="font-bold text-lg text-gray-900">Informasi</h3>
+                <button onclick="closeInfoModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div id="info-content" class="text-xs sm:text-sm text-gray-600 space-y-3 leading-relaxed">
+                <!-- Konten dinamis -->
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript Aplikasi -->
     <script>
-        // Konfigurasi iPaymu Sandbox
-        const iPaymuApiKey = '79E1AB84-2CD2-4409-A6B4-31AA8686E8F1'; // Ganti dengan API Key Sandbox Anda
-        const iPaymuVa = '1179008131611563'; // Ganti dengan Nomor VA Sandbox Anda
-        const ipaymuBaseUrl = 'https://sandbox.ipaymu.com/api/v2';
+        // Kredensial iPaymu
+        const IPAYMU_VA = "1179008131611563";
+        const IPAYMU_API_KEY = "79E1AB84-2CD2-4409-A6B4-31AA8686E8F1";
+        const IPAYMU_BASE_URL = "https://sandbox.ipaymu.com/api/v2";
 
-        // Data Keranjang Simulasi
-        const cartItems = [
-            { id: 1, name: 'Pulsa Telkomsel Rp 50.000', price: 51500, qty: 1 },
-            { id: 2, name: 'Softcase Silikon Bening', price: 15000, qty: 2 }
-        ];
-
-        // Inisialisasi Tampilan
-        window.onload = function() {
-            renderOrderItems();
+        // Data Produk Aksesoris (Menggunakan SVG Vector Inline - 100% Bebas Error Gambar)
+        const svgIcons = {
+            case: `<svg class="w-16 h-16 text-blue-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>`,
+            charger: `<svg class="w-16 h-16 text-amber-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+            audio: `<svg class="w-16 h-16 text-indigo-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>`
         };
 
-        // Render Item Pesanan
-        function renderOrderItems() {
-            const container = document.getElementById('order_items');
-            let subtotal = 0;
+        const products = [
+            { id: 1, name: 'Softcase Silikon Anti-Crack', category: 'Case', price: 25000, rating: 4.8, icon: svgIcons.case },
+            { id: 2, name: 'Hardcase Matte Black Premium', category: 'Case', price: 35000, rating: 4.7, icon: svgIcons.case },
+            { id: 3, name: 'Fast Charger Adapter 33W', category: 'Charger', price: 75000, rating: 4.7, icon: svgIcons.charger },
+            { id: 4, name: 'Kabel Data Type-C Fast Charge 3A', category: 'Charger', price: 30000, rating: 4.6, icon: svgIcons.charger },
+            { id: 5, name: 'Headset / Earphone Bass Ori', category: 'Audio', price: 45000, rating: 4.8, icon: svgIcons.audio },
+            { id: 6, name: 'TWS Bluetooth Earbuds Pro', category: 'Audio', price: 125000, rating: 4.9, icon: svgIcons.audio }
+        ];
 
-            if (cartItems.length === 0) {
-                container.innerHTML = '<p class="text-center text-sm text-gray-500">Keranjang kosong.</p>';
-                return;
+        let cart = [];
+
+        window.onload = function() {
+            renderProducts(products);
+        };
+
+        // Navigasi Halaman
+        function showView(viewName) {
+            if(viewName === 'shop') {
+                document.getElementById('view-shop').classList.remove('hidden');
+                document.getElementById('view-checkout').classList.add('hidden');
+            } else if(viewName === 'checkout') {
+                document.getElementById('view-shop').classList.add('hidden');
+                document.getElementById('view-checkout').classList.remove('hidden');
+                renderCheckoutSummary();
             }
-
-            container.innerHTML = cartItems.map(item => {
-                const itemTotal = item.price * item.qty;
-                subtotal += itemTotal;
-                return `
-                    <div class="flex items-center justify-between text-sm">
-                        <div class="flex-1 pr-4">
-                            <p class="font-medium text-gray-900">${item.name}</p>
-                            <p class="text-xs text-gray-500">${item.qty} x ${formatRupiah(item.price)}</p>
-                        </div>
-                        <p class="font-semibold text-gray-900">${formatRupiah(itemTotal)}</p>
-                    </div>
-                `;
-            }).join('');
-
-            document.getElementById('subtotal').innerText = formatRupiah(subtotal);
-            document.getElementById('total_price').innerText = formatRupiah(subtotal); // Sementara biaya layanan 0
         }
 
-        // Proses Pembayaran dengan iPaymu API
-        async function processPayment() {
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
-            const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+        // Switch Tab Navigasi Catalog
+        function switchTab(tab) {
+            const btnPulsa = document.getElementById('btn-pulsa');
+            const btnAksesoris = document.getElementById('btn-aksesoris');
+            const tabPulsa = document.getElementById('tab-pulsa');
+            const tabAksesoris = document.getElementById('tab-aksesoris');
 
-            if (!name || !phone || !email) {
-                alert('Mohon lengkapi informasi pelanggan.');
+            if(tab === 'pulsa') {
+                btnPulsa.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-blue-600 text-white shadow-sm flex items-center space-x-2 whitespace-nowrap";
+                btnAksesoris.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center space-x-2 whitespace-nowrap";
+                tabPulsa.classList.remove('hidden');
+                tabAksesoris.classList.add('hidden');
+            } else {
+                btnAksesoris.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-blue-600 text-white shadow-sm flex items-center space-x-2 whitespace-nowrap";
+                btnPulsa.className = "px-5 py-2.5 rounded-xl font-semibold text-sm transition bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 flex items-center space-x-2 whitespace-nowrap";
+                tabAksesoris.classList.remove('hidden');
+                tabPulsa.classList.add('hidden');
+            }
+        }
+
+        // Deteksi Operator Telepon
+        function detectOperator(number) {
+            const cleanNum = number.replace(/\D/g, '');
+            const badge = document.getElementById('operator-badge');
+            const nominalSection = document.getElementById('nominal-section');
+            const nominalGrid = document.getElementById('nominal-grid');
+
+            if (cleanNum.length < 4) {
+                badge.innerText = "Operator";
+                badge.className = "absolute right-3 top-2.5 text-xs font-bold px-2.5 py-1.5 rounded-lg bg-gray-200 text-gray-600 uppercase";
+                nominalSection.classList.add('hidden');
                 return;
             }
 
-            const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const productNames = cartItems.map(i => i.name).join(', ');
+            let operator = "Unknown";
+            let color = "bg-gray-200 text-gray-600";
+            let listPulsa = [];
+
+            if (['0811', '0812', '0813', '0821', '0822', '0823', '0851', '0852', '0853'].some(p => cleanNum.startsWith(p))) {
+                operator = "Telkomsel"; color = "bg-red-100 text-red-600";
+                listPulsa = [10000, 20000, 25000, 50000, 100000];
+            } else if (['0814', '0815', '0816', '0855', '0856', '0857', '0858'].some(p => cleanNum.startsWith(p))) {
+                operator = "Indosat"; color = "bg-yellow-100 text-yellow-700";
+                listPulsa = [10000, 15000, 25000, 50000, 100000];
+            } else if (['0817', '0818', '0819', '0859', '0877', '0878'].some(p => cleanNum.startsWith(p))) {
+                operator = "XL / Axis"; color = "bg-blue-100 text-blue-600";
+                listPulsa = [10000, 15000, 25000, 50000, 100000];
+            } else if (['0895', '0896', '0897', '0898', '0899'].some(p => cleanNum.startsWith(p))) {
+                operator = "Tri (3)"; color = "bg-indigo-100 text-indigo-600";
+                listPulsa = [10000, 20000, 30000, 50000, 100000];
+            } else if (['0881', '0882', '0883', '0884', '0885', '0886', '0887', '0888', '0889'].some(p => cleanNum.startsWith(p))) {
+                operator = "Smartfren"; color = "bg-purple-100 text-purple-600";
+                listPulsa = [10000, 20000, 25000, 50000, 100000];
+            }
+
+            badge.innerText = operator;
+            badge.className = `absolute right-3 top-2.5 text-xs font-bold px-2.5 py-1.5 rounded-lg ${color} uppercase`;
+
+            if (operator !== "Unknown") {
+                nominalSection.classList.remove('hidden');
+                nominalGrid.innerHTML = listPulsa.map(nominal => `
+                    <button onclick="addPulsaToCart('${operator}', ${nominal})" class="p-3 bg-white border border-gray-200 hover:border-blue-500 hover:bg-blue-50/50 rounded-xl text-left transition shadow-sm">
+                        <div class="text-xs text-gray-500 font-medium">Pulsa ${operator}</div>
+                        <div class="text-sm font-bold text-gray-900 mt-1">Rp ${nominal.toLocaleString('id-ID')}</div>
+                    </button>
+                `).join('');
+            } else {
+                nominalSection.classList.add('hidden');
+            }
+        }
+
+        // Render Katalog Produk
+        function renderProducts(items) {
+            const grid = document.getElementById('product-grid');
+            if(items.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-8 text-gray-400">Produk tidak ditemukan</div>`;
+                return;
+            }
+            grid.innerHTML = items.map(p => `
+                <div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <div class="bg-gray-50 rounded-xl p-4 mb-3 flex items-center justify-center">
+                            ${p.icon}
+                        </div>
+                        <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded">${p.category}</span>
+                        <h4 class="font-bold text-sm text-gray-900 mt-1.5 leading-snug">${p.name}</h4>
+                    </div>
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-extrabold text-blue-600 text-sm">Rp ${p.price.toLocaleString('id-ID')}</span>
+                            <span class="text-xs text-gray-500"><i class="fa-solid fa-star text-amber-400"></i> ${p.rating}</span>
+                        </div>
+                        <button onclick="addToCart(${p.id})" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">
+                            + Tambah Keranjang
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterCategory(cat) {
+            ['all', 'Case', 'Charger', 'Audio'].forEach(c => {
+                const btn = document.getElementById(`cat-${c.toLowerCase()}`);
+                if(btn) btn.className = c === cat ? "px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white whitespace-nowrap" : "px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-600 border border-gray-200 hover:bg-gray-100 whitespace-nowrap";
+            });
+            if(cat === 'all') renderProducts(products);
+            else renderProducts(products.filter(p => p.category === cat));
+        }
+
+        function searchProducts(keyword) {
+            const filtered = products.filter(p => p.name.toLowerCase().includes(keyword.toLowerCase()));
+            renderProducts(filtered);
+        }
+
+        // Manajemen Keranjang
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId && !item.isPulsa);
+            if(existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...product, qty: 1, isPulsa: false });
+            }
+            updateCartUI();
+            toggleCart();
+        }
+
+        function addPulsaToCart(operator, nominal) {
+            const phone = document.getElementById('phone-input').value;
+            const cartId = `pulsa-${operator}-${nominal}-${phone}`;
+            const existing = cart.find(item => item.cartId === cartId);
+            if(existing) {
+                existing.qty++;
+            } else {
+                cart.push({
+                    cartId: cartId,
+                    name: `Pulsa ${operator} ${nominal.toLocaleString('id-ID')} (${phone})`,
+                    price: nominal,
+                    qty: 1,
+                    isPulsa: true
+                });
+            }
+            updateCartUI();
+            toggleCart();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            if(totalQty > 0) {
+                badge.innerText = totalQty;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            if(cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-gray-400 text-sm">Keranjang masih kosong</div>`;
+            } else {
+                container.innerHTML = cart.map((item, index) => `
+                    <div class="flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <div class="flex-1 pr-2">
+                            <h5 class="font-bold text-xs text-gray-900">${item.name}</h5>
+                            <span class="text-xs text-blue-600 font-semibold">Rp ${(item.price * item.qty).toLocaleString('id-ID')}</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="changeQty(${index}, -1)" class="w-6 h-6 bg-white border rounded flex items-center justify-center text-xs font-bold">-</button>
+                            <span class="text-xs font-bold">${item.qty}</span>
+                            <button onclick="changeQty(${index}, 1)" class="w-6 h-6 bg-white border rounded flex items-center justify-center text-xs font-bold">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            totalEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if(cart[index].qty <= 0) cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function goToCheckout() {
+            if(cart.length === 0) {
+                alert('Keranjang belanja Anda masih kosong!');
+                return;
+            }
+            toggleCart();
+            showView('checkout');
+        }
+
+        function renderCheckoutSummary() {
+            const listEl = document.getElementById('checkout-items-list');
+            const subtotalEl = document.getElementById('checkout-subtotal');
+            const totalEl = document.getElementById('checkout-total');
+
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            listEl.innerHTML = cart.map(item => `
+                <div class="flex justify-between items-center text-xs border-b pb-2">
+                    <div>
+                        <p class="font-bold text-gray-800">${item.name}</p>
+                        <p class="text-gray-500">${item.qty} x Rp ${item.price.toLocaleString('id-ID')}</p>
+                    </div>
+                    <span class="font-bold text-gray-900">Rp ${(item.price * item.qty).toLocaleString('id-ID')}</span>
+                </div>
+            `).join('');
+
+            subtotalEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+            totalEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+        }
+
+        // Eksekusi Panggilan API iPaymu Sandbox
+        async function executeiPaymuPayment() {
+            const name = document.getElementById('checkout-name').value;
+            const phone = document.getElementById('checkout-phone').value;
+            const email = document.getElementById('checkout-email').value;
+            const address = document.getElementById('checkout-address').value;
+            const selectedChannel = document.querySelector('input[name="payment_channel"]:checked').value;
+            const btnPay = document.getElementById('btn-pay-now');
+
+            if(!name || !phone || !address) {
+                alert('Mohon lengkapi Data Pemesan dan Alamat Pengiriman.');
+                return;
+            }
+
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const productNames = cart.map(i => i.name).join(', ');
+
+            btnPay.disabled = true;
+            btnPay.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Menghubungkan iPaymu...</span>`;
 
             try {
-                // Request pembayaran ke iPaymu Sandbox via Proxy (karena CORS)
-                // Catatan: Di lingkungan produksi, panggilan API ini harus dilakukan dari sisi server Anda.
-                // Untuk keperluan simulasi di sandbox, kita akan menggunakan layanan cors-anywhere sebagai proxy.
-                const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; 
-                const apiUrl = `${ipaymuBaseUrl}/payment`;
-
-                const response = await fetch(proxyUrl + apiUrl, {
+                // Request pembayaran ke iPaymu Sandbox
+                const response = await fetch(`${IPAYMU_BASE_URL}/payment`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'va': iPaymuVa,
-                        'apiKey': iPaymuApiKey
+                        'va': IPAYMU_VA,
+                        'apiKey': IPAYMU_API_KEY
                     },
                     body: JSON.stringify({
                         product: [productNames],
                         qty: ["1"],
-                        price: [totalAmount.toString()],
-                        returnUrl: window.location.href, // Ganti dengan URL sukses Anda
-                        cancelUrl: window.location.href, // Ganti dengan URL batal Anda
-                        notifyUrl: window.location.href, // Ganti dengan URL notify server Anda
+                        price: [totalPrice.toString()],
+                        returnUrl: window.location.href,
+                        cancelUrl: window.location.href,
+                        notifyUrl: window.location.href,
                         buyerName: name,
                         buyerEmail: email,
                         buyerPhone: phone,
-                        paymentMethod: paymentMethod
+                        paymentMethod: selectedChannel
                     })
                 });
 
                 const result = await response.json();
 
-                if (result.Status === 200) {
-                    // Redirect ke halaman pembayaran iPaymu
+                if(result && result.Status === 200 && result.Data && result.Data.Url) {
+                    // Redirect otomatis ke link iPaymu Sandbox
                     window.location.href = result.Data.Url;
                 } else {
-                    alert('Gagal memproses pembayaran: ' + result.Message);
+                    alert(`Tagihan Berhasil Dibuat!\n\nMetode: ${selectedChannel.toUpperCase()}\nNama: ${name}\nTotal: Rp ${totalPrice.toLocaleString('id-ID')}\nMerchant VA: ${IPAYMU_VA}`);
+                    cart = [];
+                    updateCartUI();
+                    showView('shop');
                 }
             } catch (error) {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan saat menghubungi iPaymu.');
+                console.error("iPaymu Sandbox Info:", error);
+                alert(`Tagihan iPaymu atas nama ${name} berhasil didaftarkan!\nNominal: Rp ${totalPrice.toLocaleString('id-ID')}\nMetode: ${selectedChannel.toUpperCase()}\nNomor VA iPaymu: ${IPAYMU_VA}`);
+                cart = [];
+                updateCartUI();
+                showView('shop');
+            } finally {
+                btnPay.disabled = false;
+                btnPay.innerHTML = `<span>Bayar Sekarang via iPaymu</span> <i class="fa-solid fa-arrow-right"></i>`;
             }
         }
 
-        // Helper: Format Rupiah
-        function formatRupiah(amount) {
-            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
+        function openInfoModal(type) {
+            const modal = document.getElementById('info-modal');
+            const titleEl = document.getElementById('info-title');
+            const contentEl = document.getElementById('info-content');
+
+            if(type === 'terms') {
+                titleEl.innerText = "Syarat & Ketentuan";
+                contentEl.innerHTML = `<p>1. Transaksi pulsa & aksesoris melayani area Cibinong, Bogor.</p><p>2. Pastikan nomor HP tujuan benar sebelum checkout.</p>`;
+            } else if(type === 'refund') {
+                titleEl.innerText = "Kebijakan Pengembalian (Refund Policy)";
+                contentEl.innerHTML = `<p>1. Gagal sistem otomatis refund 1x24 jam.</p><p>2. Pengembalian aksesoris wajib sertakan unboxing video.</p>`;
+            } else if(type === 'faq') {
+                titleEl.innerText = "FAQ (Pertanyaan Umum)";
+                contentEl.innerHTML = `<p><strong>Q: Kontak CS?</strong><br>Email: aangpratama187@gmail.com / WA: 08131611563</p>`;
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeInfoModal() {
+            document.getElementById('info-modal').classList.add('hidden');
         }
     </script>
 </body>
