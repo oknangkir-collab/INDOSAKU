@@ -29,6 +29,12 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
 
+    <!-- Top Announcement Bar -->
+    <div class="bg-blue-600 text-white text-[11px] sm:text-xs py-2 px-4 text-center font-medium flex items-center justify-center space-x-2">
+        <i class="fa-solid fa-bullhorn animate-bounce"></i>
+        <span>Selamat datang di INDOSAKU Cibinong! Layanan Digital, PPOB & Aksesoris HP Buka 24 Jam Nonstop.</span>
+    </div>
+
     <!-- Header / Navbar -->
     <header class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -91,7 +97,7 @@
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Nomor Handphone</label>
                             <div class="relative">
-                                <input type="tel" id="phone-input" oninput="detectOperator(this.value)" placeholder="Contoh: 0812345678" maxlength="14" class="w-full pl-4 pr-28 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none font-semibold text-gray-900">
+                                <input type="tel" id="phone-input" oninput="detectOperator(this.value)" placeholder="Contoh: 08131611563" maxlength="14" class="w-full pl-4 pr-28 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none font-semibold text-gray-900">
                                 <div id="operator-badge" class="absolute right-3 top-2.5 text-xs font-bold px-2.5 py-1.5 rounded-lg bg-gray-200 text-gray-600 uppercase">
                                     Operator
                                 </div>
@@ -105,7 +111,7 @@
                 </div>
             </section>
 
-            <!-- TAB 2: PPOB & TAGIHAN LAINNYA (BARU & LENGKAP) -->
+            <!-- TAB 2: PPOB & TAGIHAN LAINNYA (DENGAN CEK OTOMATIS) -->
             <section id="tab-ppob" class="hidden space-y-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- PLN Token / Tagihan -->
@@ -113,7 +119,7 @@
                         <div>
                             <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3"><i class="fa-solid fa-lightbulb"></i></div>
                             <h4 class="font-bold text-gray-900 text-base">Listrik PLN (Token & Pascabayar)</h4>
-                            <p class="text-xs text-gray-500 mt-1">Isi token listrik prabayar atau bayar tagihan bulanan PLN.</p>
+                            <p class="text-xs text-gray-500 mt-1">Cek tagihan atau beli token listrik prabayar instan.</p>
                         </div>
                         <div class="space-y-2 pt-2">
                             <input type="text" id="pln-id" placeholder="Nomor Meter / ID Pelanggan" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
@@ -123,7 +129,10 @@
                                 <option value="100000">Token PLN Rp 100.000</option>
                                 <option value="200000">Token PLN Rp 200.000</option>
                             </select>
-                            <button onclick="addPpobToCart('Token PLN', 'pln-id', 'pln-nominal')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Tambah ke Keranjang</button>
+                            <div class="flex gap-2">
+                                <button onclick="checkBillAuto('Listrik PLN', 'pln-id')" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 rounded-xl text-xs transition"><i class="fa-solid fa-magnifying-glass"></i> Cek Tagihan</button>
+                                <button onclick="addPpobToCart('Token PLN', 'pln-id', 'pln-nominal')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Beli</button>
+                            </div>
                         </div>
                     </div>
 
@@ -132,7 +141,7 @@
                         <div>
                             <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3"><i class="fa-solid fa-heart-pulse"></i></div>
                             <h4 class="font-bold text-gray-900 text-base">BPJS Kesehatan</h4>
-                            <p class="text-xs text-gray-500 mt-1">Bayar iuran bulanan BPJS Kesehatan keluarga tepat waktu.</p>
+                            <p class="text-xs text-gray-500 mt-1">Cek tagihan & bayar iuran bulanan BPJS Kesehatan.</p>
                         </div>
                         <div class="space-y-2 pt-2">
                             <input type="text" id="bpjs-id" placeholder="Nomor VA BPJS / Keluarga" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
@@ -141,7 +150,10 @@
                                 <option value="100000">1 Bulan (Kelas 2 - Rp 100.000)</option>
                                 <option value="150000">1 Bulan (Kelas 1 - Rp 150.000)</option>
                             </select>
-                            <button onclick="addPpobToCart('BPJS Kesehatan', 'bpjs-id', 'bpjs-bulan')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Tambah ke Keranjang</button>
+                            <div class="flex gap-2">
+                                <button onclick="checkBillAuto('BPJS Kesehatan', 'bpjs-id')" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 rounded-xl text-xs transition"><i class="fa-solid fa-magnifying-glass"></i> Cek</button>
+                                <button onclick="addPpobToCart('BPJS Kesehatan', 'bpjs-id', 'bpjs-bulan')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Beli</button>
+                            </div>
                         </div>
                     </div>
 
@@ -150,12 +162,15 @@
                         <div>
                             <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3"><i class="fa-solid fa-faucet-drip"></i></div>
                             <h4 class="font-bold text-gray-900 text-base">PDAM / Air Bersih</h4>
-                            <p class="text-xs text-gray-500 mt-1">Pembayaran tagihan air PDAM daerah Bogor & sekitarnya.</p>
+                            <p class="text-xs text-gray-500 mt-1">Cek rincian tagihan air PDAM daerah Bogor & sekitarnya.</p>
                         </div>
                         <div class="space-y-2 pt-2">
                             <input type="text" id="pdam-id" placeholder="Nomor Pelanggan PDAM" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                            <input type="number" id="pdam-nominal" placeholder="Total Tagihan (Rp)" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                            <button onclick="addPpobDirectCart('PDAM Air', 'pdam-id', 'pdam-nominal')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Tambah ke Keranjang</button>
+                            <input type="number" id="pdam-nominal" placeholder="Nominal Tertunggak (Rp)" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <div class="flex gap-2">
+                                <button onclick="checkBillAuto('PDAM Air', 'pdam-id')" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 rounded-xl text-xs transition"><i class="fa-solid fa-magnifying-glass"></i> Cek</button>
+                                <button onclick="addPpobDirectCart('PDAM Air', 'pdam-id', 'pdam-nominal')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Beli</button>
+                            </div>
                         </div>
                     </div>
 
@@ -169,8 +184,8 @@
                         <div class="space-y-2 pt-2">
                             <input type="text" id="game-id" placeholder="ID User / Server Game" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
                             <select id="game-nominal" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                <option value="10000">MLBB 86 Diamonds (Rp 20.000)</option>
-                                <option value="50000">MLBB 257 Diamonds (Rp 60.000)</option>
+                                <option value="20000">MLBB 86 Diamonds (Rp 20.000)</option>
+                                <option value="60000">MLBB 257 Diamonds (Rp 60.000)</option>
                                 <option value="20000">Free Fire 140 Diamonds (Rp 20.000)</option>
                             </select>
                             <button onclick="addPpobToCart('Voucher Game', 'game-id', 'game-nominal')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Tambah ke Keranjang</button>
@@ -206,12 +221,15 @@
                         <div>
                             <div class="w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3"><i class="fa-solid fa-wifi"></i></div>
                             <h4 class="font-bold text-gray-900 text-base">Telkom / Indihome</h4>
-                            <p class="text-xs text-gray-500 mt-1">Bayar tagihan telepon rumah & internet Indihome bulanan.</p>
+                            <p class="text-xs text-gray-500 mt-1">Cek rincian tagihan telepon rumah & internet Indihome.</p>
                         </div>
                         <div class="space-y-2 pt-2">
                             <input type="text" id="indihome-id" placeholder="Nomor Pelanggan Indihome" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                            <input type="number" id="indihome-nominal" placeholder="Nominal Tagihan (Rp)" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                            <button onclick="addPpobDirectCart('Indihome', 'indihome-id', 'indihome-nominal')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Tambah ke Keranjang</button>
+                            <input type="number" id="indihome-nominal" placeholder="Nominal Tertunggak (Rp)" class="w-full px-3 py-2 bg-gray-50 border rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <div class="flex gap-2">
+                                <button onclick="checkBillAuto('Indihome', 'indihome-id')" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 rounded-xl text-xs transition"><i class="fa-solid fa-magnifying-glass"></i> Cek</button>
+                                <button onclick="addPpobDirectCart('Indihome', 'indihome-id', 'indihome-nominal')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs transition">+ Beli</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -371,29 +389,55 @@
                 </div>
             </div>
         </div>
+
+        <!-- ================= PAGE 3: HALAMAN INFORMASI (SYARAT, REFUND, FAQ) ================= -->
+        <div id="view-info" class="hidden space-y-6 max-w-4xl mx-auto">
+            <div class="flex items-center justify-between border-b border-gray-200 pb-4">
+                <button onclick="showView('shop')" class="text-sm font-bold text-blue-600 hover:underline flex items-center space-x-2">
+                    <i class="fa-solid fa-arrow-left"></i> <span>Kembali ke Beranda Utama</span>
+                </button>
+                <h2 id="page-info-title" class="text-xl font-extrabold text-gray-900">Informasi Resmi</h2>
+            </div>
+            <div id="page-info-body" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 space-y-4 text-sm text-gray-700 leading-relaxed"></div>
+        </div>
+
     </main>
 
-    <!-- MODAL HASIL PEMBAYARAN (NOMOR VA & QRIS MUNCUL LANGSUNG DI SINI) -->
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/628131611563?text=Halo%20Admin%20INDOSAKU,%20saya%20butuh%20bantuan%20transaksi." target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition transform hover:scale-110">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- MODAL HASIL CEK TAGIHAN OTOMATIS -->
+    <div id="check-bill-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4 text-center relative">
+            <button onclick="closeCheckBillModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto text-xl font-bold">
+                <i class="fa-solid fa-file-invoice"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Hasil Cek Tagihan</h3>
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-left space-y-2 text-xs">
+                <div class="flex justify-between"><span class="text-gray-500">Layanan:</span> <span id="cb-service" class="font-bold">-</span></div>
+                <div class="flex justify-between"><span class="text-gray-500">ID Pelanggan:</span> <span id="cb-id" class="font-mono font-bold">-</span></div>
+                <div class="flex justify-between"><span class="text-gray-500">Nama Pelanggan:</span> <span class="font-bold text-gray-900">Bpk/Ibu Pelanggan</span></div>
+                <div class="flex justify-between border-t pt-2"><span class="text-gray-500 font-bold">Total Tertunggak:</span> <span id="cb-amount" class="font-bold text-blue-600 text-sm">-</span></div>
+            </div>
+            <button onclick="closeCheckBillModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl text-xs transition">Tutup</button>
+        </div>
+    </div>
+
+    <!-- MODAL HASIL PEMBAYARAN -->
     <div id="payment-result-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 text-center relative">
             <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-            
             <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto text-xl font-bold">
                 <i class="fa-solid fa-receipt"></i>
             </div>
-            
             <h3 class="text-lg font-bold text-gray-900">Tagihan Pembayaran Berhasil</h3>
             <p class="text-xs text-gray-500">Silakan selesaikan pembayaran sebelum batas waktu berakhir.</p>
-
             <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-left space-y-2">
-                <div class="flex justify-between text-xs">
-                    <span class="text-gray-500">Metode:</span>
-                    <span id="res-method" class="font-bold uppercase text-gray-800">-</span>
-                </div>
-                <div class="flex justify-between text-xs">
-                    <span class="text-gray-500">Total Tagihan:</span>
-                    <span id="res-total" class="font-bold text-blue-600">-</span>
-                </div>
+                <div class="flex justify-between text-xs"><span class="text-gray-500">Metode:</span> <span id="res-method" class="font-bold uppercase text-gray-800">-</span></div>
+                <div class="flex justify-between text-xs"><span class="text-gray-500">Total Tagihan:</span> <span id="res-total" class="font-bold text-blue-600">-</span></div>
                 <div id="container-va" class="pt-2 border-t border-dashed border-gray-300 hidden">
                     <p class="text-[11px] text-gray-500 font-semibold mb-1">Nomor Virtual Account:</p>
                     <div class="flex items-center justify-between bg-white p-2.5 rounded-lg border">
@@ -406,10 +450,7 @@
                     <img id="res-qris-image" src="" alt="QRIS Code" class="w-48 h-48 mx-auto rounded-lg border shadow-sm">
                 </div>
             </div>
-
-            <button onclick="finishOrderSuccess()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl text-sm transition">
-                Selesai / Kembali ke Toko
-            </button>
+            <button onclick="finishOrderSuccess()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl text-sm transition">Selesai / Kembali ke Toko</button>
         </div>
     </div>
 
@@ -426,15 +467,21 @@
             <div class="space-y-2">
                 <h4 class="font-bold text-gray-900 text-base">Kontak & Lokasi</h4>
                 <p class="text-xs text-gray-600 flex items-center space-x-2"><i class="fa-solid fa-location-dot text-blue-600 w-4"></i> <span>Alamat: Cibinong, Bogor, Jawa Barat</span></p>
-                <p class="text-xs text-gray-600 flex items-center space-x-2"><i class="fa-solid fa-phone text-blue-600 w-4"></i> <span>Telepon / WA: 08131611563</span></p>
-                <p class="text-xs text-gray-600 flex items-center space-x-2"><i class="fa-solid fa-envelope text-blue-600 w-4"></i> <span>Email: aangpratama187@gmail.com</span></p>
+                <p class="text-xs text-gray-600 flex items-center space-x-2">
+                    <i class="fa-solid fa-phone text-blue-600 w-4"></i> 
+                    <a href="https://wa.me/628131611563?text=Halo%20Admin%20INDOSAKU,%20saya%20mau%20konsultasi%20transaksi." target="_blank" class="text-blue-600 hover:underline font-semibold">08131611563 (WhatsApp)</a>
+                </p>
+                <p class="text-xs text-gray-600 flex items-center space-x-2">
+                    <i class="fa-solid fa-envelope text-blue-600 w-4"></i> 
+                    <a href="mailto:aangpratama187@gmail.com?subject=Pertanyaan%20Layanan%20INDOSAKU" class="text-blue-600 hover:underline font-semibold">aangpratama187@gmail.com</a>
+                </p>
             </div>
             <div class="space-y-2">
                 <h4 class="font-bold text-gray-900 text-base">Informasi Legalitas</h4>
                 <div class="flex flex-col space-y-1 text-xs">
-                    <button onclick="openInfoModal('terms')" class="text-left text-blue-600 hover:underline">Syarat & Ketentuan</button>
-                    <button onclick="openInfoModal('refund')" class="text-left text-blue-600 hover:underline">Kebijakan Pengembalian (Refund Policy)</button>
-                    <button onclick="openInfoModal('faq')" class="text-left text-blue-600 hover:underline">FAQ (Pertanyaan Umum)</button>
+                    <button onclick="openSublinkPage('terms')" class="text-left text-blue-600 hover:underline font-medium">Syarat & Ketentuan</button>
+                    <button onclick="openSublinkPage('refund')" class="text-left text-blue-600 hover:underline font-medium">Kebijakan Pengembalian (Refund Policy)</button>
+                    <button onclick="openSublinkPage('faq')" class="text-left text-blue-600 hover:underline font-medium">FAQ (Pertanyaan Umum)</button>
                 </div>
             </div>
         </div>
@@ -466,17 +513,6 @@
         </div>
     </div>
 
-    <!-- Modal Informasi -->
-    <div id="info-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 max-h-[80vh] overflow-y-auto">
-            <div class="flex justify-between items-center border-b pb-3 sticky top-0 bg-white">
-                <h3 id="info-title" class="font-bold text-lg text-gray-900">Informasi</h3>
-                <button onclick="closeInfoModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            <div id="info-content" class="text-xs sm:text-sm text-gray-600 space-y-3 leading-relaxed"></div>
-        </div>
-    </div>
-
     <!-- JavaScript Aplikasi -->
     <script>
         const svgIcons = {
@@ -503,14 +539,58 @@
         };
 
         function showView(viewName) {
+            document.getElementById('view-shop').classList.add('hidden');
+            document.getElementById('view-checkout').classList.add('hidden');
+            document.getElementById('view-info').classList.add('hidden');
+
             if(viewName === 'shop') {
                 document.getElementById('view-shop').classList.remove('hidden');
-                document.getElementById('view-checkout').classList.add('hidden');
             } else if(viewName === 'checkout') {
-                document.getElementById('view-shop').classList.add('hidden');
                 document.getElementById('view-checkout').classList.remove('hidden');
                 renderCheckoutSummary();
+            } else if(viewName === 'info') {
+                document.getElementById('view-info').classList.remove('hidden');
             }
+            window.scrollTo(0, 0);
+        }
+
+        function openSublinkPage(type) {
+            const titleEl = document.getElementById('page-info-title');
+            const bodyEl = document.getElementById('page-info-body');
+
+            if(type === 'terms') {
+                titleEl.innerText = "Syarat & Ketentuan - INDOSAKU";
+                bodyEl.innerHTML = `
+                    <h3 class="font-bold text-base text-gray-900 mb-2">1. Ketentuan Umum Transaksi</h3>
+                    <p>Selamat datang di layanan resmi INDOSAKU Cibinong, Bogor. Seluruh transaksi pembelian pulsa, paket data, produk PPOB (PLN, BPJS, PDAM, E-Wallet, Game), dan aksesoris HP tunduk pada syarat dan ketentuan yang berlaku di platform kami.</p>
+                    <h3 class="font-bold text-base text-gray-900 mt-4 mb-2">2. Tanggung Jawab Pelanggan</h3>
+                    <p>Pelanggan wajib memastikan nomor handphone tujuan, nomor meter PLN, ID pelanggan, atau nomor akun tujuan lainnya telah diisi dengan benar dan valid sebelum melakukan konfirmasi pembayaran. INDOSAKU tidak bertanggung jawab atas kesalahan transfer akibat kelalaian pelanggan dalam memasukkan data tujuan.</p>
+                    <h3 class="font-bold text-base text-gray-900 mt-4 mb-2">3. Waktu Proses Layanan</h3>
+                    <p>Layanan transaksi digital bersifat otomatis 24 jam. Apabila terjadi gangguan jaringan provider pusat, proses maksimal dapat memakan waktu 1x24 jam.</p>
+                `;
+            } else if(type === 'refund') {
+                titleEl.innerText = "Kebijakan Pengembalian (Refund Policy) - INDOSAKU";
+                bodyEl.innerHTML = `
+                    <h3 class="font-bold text-base text-gray-900 mb-2">1. Ketentuan Pengembalian Dana (Refund)</h3>
+                    <p>Pengembalian dana hanya berlaku apabila transaksi dinyatakan gagal oleh sistem pusat atau provider, namun saldo pelanggan sudah terpotong.</p>
+                    <h3 class="font-bold text-base text-gray-900 mt-4 mb-2">2. Proses & Waktu Refund</h3>
+                    <p>Dana yang gagal akan otomatis direfund ke saldo atau rekening pengirim dalam kurun waktu 1x24 jam hari kerja setelah verifikasi admin selesai.</p>
+                    <h3 class="font-bold text-base text-gray-900 mt-4 mb-2">3. Pengembalian Barang Aksesoris</h3>
+                    <p>Untuk produk fisik berupa aksesoris HP, pengembalian barang atau retur wajib disertai dengan video unboxing lengkap tanpa terpotong sejak paket diterima.</p>
+                `;
+            } else if(type === 'faq') {
+                titleEl.innerText = "FAQ (Pertanyaan Umum) - INDOSAKU";
+                bodyEl.innerHTML = `
+                    <h3 class="font-bold text-base text-gray-900 mb-2">Q: Di mana lokasi fisik toko INDOSAKU?</h3>
+                    <p>A: Toko fisik kami berlokasi strategis di wilayah Cibinong, Kabupaten Bogor, Jawa Barat.</p>
+                    <h3 class="font-bold text-base text-gray-900 mt-4 mb-2">Q: Bagaimana cara menghubungi Customer Service?</h3>
+                    <p>A: Anda dapat langsung menghubungi kami melalui WhatsApp resmi di nomor <strong>08131611563</strong> atau melalui email di <strong>aangpratama187@gmail.com</strong>.</p>
+                    <h3 class="font-bold text-base text-gray-900 mt-4 mb-2">Q: Metode pembayaran apa saja yang didukung?</h3>
+                    <p>A: Kami mendukung pembayaran instan menggunakan QRIS (semua e-wallet & mobile banking) serta Transfer Bank Virtual Account (BCA, Mandiri, BRI, BNI, CIMB Niaga, dan BSI).</p>
+                `;
+            }
+
+            showView('info');
         }
 
         function switchTab(tab) {
@@ -589,6 +669,25 @@
             } else {
                 nominalSection.classList.add('hidden');
             }
+        }
+
+        // FUNGSI CEK TAGIHAN OTOMATIS (SIMULASI)
+        function checkBillAuto(serviceName, idField) {
+            const targetId = document.getElementById(idField).value;
+            if(!targetId) { alert('Masukkan Nomor Pelanggan / ID terlebih dahulu!'); return; }
+
+            // Simulasi hasil cek tagihan otomatis
+            const simulatedAmount = Math.floor(45000 + Math.random() * 150000);
+            
+            document.getElementById('cb-service').innerText = serviceName;
+            document.getElementById('cb-id').innerText = targetId;
+            document.getElementById('cb-amount').innerText = `Rp ${simulatedAmount.toLocaleString('id-ID')}`;
+            
+            document.getElementById('check-bill-modal').classList.remove('hidden');
+        }
+
+        function closeCheckBillModal() {
+            document.getElementById('check-bill-modal').classList.add('hidden');
         }
 
         function renderProducts(items) {
@@ -820,28 +919,6 @@
             updateCartUI();
             closePaymentModal();
             showView('shop');
-        }
-
-        function openInfoModal(type) {
-            const modal = document.getElementById('info-modal');
-            const titleEl = document.getElementById('info-title');
-            const contentEl = document.getElementById('info-content');
-
-            if(type === 'terms') {
-                titleEl.innerText = "Syarat & Ketentuan";
-                contentEl.innerHTML = `<p>1. Transaksi pulsa, PPOB, & aksesoris melayani area Cibinong, Bogor.</p><p>2. Pastikan nomor tujuan benar sebelum checkout.</p>`;
-            } else if(type === 'refund') {
-                titleEl.innerText = "Kebijakan Pengembalian (Refund Policy)";
-                contentEl.innerHTML = `<p>1. Gagal sistem otomatis refund 1x24 jam.</p><p>2. Pengembalian aksesoris wajib sertakan unboxing video.</p>`;
-            } else if(type === 'faq') {
-                titleEl.innerText = "FAQ (Pertanyaan Umum)";
-                contentEl.innerHTML = `<p><strong>Q: Kontak CS?</strong><br>Email: aangpratama187@gmail.com / WA: 08131611563</p>`;
-            }
-            modal.classList.remove('hidden');
-        }
-
-        function closeInfoModal() {
-            document.getElementById('info-modal').classList.add('hidden');
         }
     </script>
 </body>
